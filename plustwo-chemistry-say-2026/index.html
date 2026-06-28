@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plus Two Chemistry — SAY Exam 2026 | Crash Study App</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c232c; --line:#2b3543;
+    --txt:#e6edf3; --muted:#9aa7b4; --accent:#4cc2ff; --accent2:#7ee787;
+    --high:#ff6b6b; --med:#ffd479; --core:#9ad0ff; --good:#3fb950; --warn:#f0a23b;
+    --chip:#222b36; --shadow:0 6px 22px rgba(0,0,0,.35);
+  }
+  [data-theme="light"]{
+    --bg:#f4f6f9; --panel:#ffffff; --panel2:#eef2f7; --line:#d7dee7;
+    --txt:#15212b; --muted:#5b6b7a; --accent:#0a6ebd; --accent2:#1a7f37;
+    --chip:#e8eef5; --shadow:0 6px 22px rgba(20,40,70,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  header.top{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--line);
+    padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow)}
+  .brand{font-weight:800;font-size:1.02rem;letter-spacing:.2px}
+  .brand small{display:block;font-weight:500;color:var(--muted);font-size:.72rem}
+  .spacer{flex:1}
+  .timer{font-variant-numeric:tabular-nums;background:var(--chip);border:1px solid var(--line);
+    border-radius:10px;padding:6px 10px;font-weight:700;font-size:.86rem}
+  .timer b{color:var(--accent)}
+  .btn{cursor:pointer;background:var(--chip);border:1px solid var(--line);color:var(--txt);
+    border-radius:9px;padding:7px 11px;font-size:.82rem;font-weight:600}
+  .btn:hover{border-color:var(--accent)}
+  .btn.acc{background:var(--accent);color:#04222f;border-color:var(--accent)}
+  input.search{flex:1;min-width:140px;max-width:340px;background:var(--chip);border:1px solid var(--line);
+    color:var(--txt);border-radius:9px;padding:8px 11px;font-size:.86rem}
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:0;max-width:1500px;margin:0 auto}
+  aside{position:sticky;top:58px;align-self:start;height:calc(100vh - 58px);overflow-y:auto;
+    border-right:1px solid var(--line);padding:14px 12px;background:var(--panel)}
+  aside h3{font-size:.74rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:14px 6px 6px}
+  .navlink{display:flex;gap:8px;align-items:center;padding:7px 9px;border-radius:8px;color:var(--txt);
+    font-size:.86rem;cursor:pointer}
+  .navlink:hover{background:var(--panel2)}
+  .navlink .num{width:22px;height:22px;flex:0 0 22px;display:grid;place-items:center;border-radius:6px;
+    background:var(--chip);font-size:.72rem;font-weight:700;color:var(--muted)}
+  .navlink.done .num{background:var(--good);color:#04220f}
+  .wt{margin-left:auto;font-size:.62rem;font-weight:800;padding:2px 6px;border-radius:20px;text-transform:uppercase}
+  .wt.High{background:rgba(255,107,107,.16);color:var(--high)}
+  .wt.Medium{background:rgba(255,212,121,.16);color:var(--med)}
+  .wt.Core{background:rgba(154,208,255,.16);color:var(--core)}
+  main{padding:18px 22px 120px;min-width:0}
+  .hero{background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--line);
+    border-radius:16px;padding:20px 22px;margin-bottom:18px}
+  .hero h1{margin:0 0 6px;font-size:1.5rem}
+  .hero p{margin:6px 0;color:var(--muted)}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .pill{background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-size:.76rem;font-weight:600}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .card h2{margin:0 0 6px;font-size:1.05rem}
+  .card.plan ol{margin:6px 0 0;padding-left:18px}
+  .card.plan li{margin:5px 0;font-size:.9rem}
+  .card.plan .t{color:var(--accent);font-weight:700}
+  section.chapter{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+  section.chapter h2{margin:0;font-size:1.22rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .chnum{background:var(--accent);color:#04222f;border-radius:8px;padding:2px 9px;font-size:.84rem;font-weight:800}
+  .why{color:var(--muted);font-size:.92rem;margin:8px 0 4px}
+  .sub{margin-top:14px}
+  .sub h4{margin:0 0 4px;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2)}
+  details.topic{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--panel2);overflow:hidden}
+  details.topic>summary{cursor:pointer;padding:10px 13px;font-weight:600;font-size:.95rem;list-style:none;display:flex;gap:8px;align-items:center}
+  details.topic>summary::-webkit-details-marker{display:none}
+  details.topic>summary::before{content:"▸";color:var(--accent);transition:transform .15s}
+  details.topic[open]>summary::before{transform:rotate(90deg)}
+  details.topic .body{padding:2px 15px 13px 30px;color:var(--txt)}
+  details.topic .body p{margin:7px 0}
+  details.topic .body ul{margin:6px 0;padding-left:18px}
+  details.topic .body li{margin:3px 0}
+  .fbox{background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:9px 12px;margin:8px 0;
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:.85rem;overflow-x:auto}
+  .frame{background:rgba(76,194,255,.07);border-left:3px solid var(--accent);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:.88rem}
+  .frame b{color:var(--accent)}
+  .qcard{border:1px solid var(--line);border-radius:10px;margin:9px 0;background:var(--panel2)}
+  .qhead{padding:11px 13px;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+  .qhead .qm{flex:0 0 auto;font-size:.66rem;font-weight:800;padding:3px 7px;border-radius:6px;background:var(--chip);color:var(--muted);white-space:nowrap;margin-top:2px}
+  .qhead .qm.m1{color:var(--core)} .qhead .qm.m2{color:var(--accent2)} .qhead .qm.m3{color:var(--med)} .qhead .qm.m4{color:var(--high)}
+  .qhead .qt{font-weight:600;font-size:.93rem}
+  .ans{display:none;padding:0 13px 13px 13px;border-top:1px dashed var(--line)}
+  .qcard.open .ans{display:block}
+  .ans .lbl{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--good);margin:11px 0 4px;font-weight:800}
+  .ans p{margin:6px 0;font-size:.92rem}
+  .ans ul{margin:6px 0;padding-left:18px;font-size:.92rem}
+  .reveal{font-size:.72rem;color:var(--accent);margin-left:auto;align-self:center;white-space:nowrap}
+  .markmap{font-size:.83rem;color:var(--muted);margin-top:6px}
+  footer{max-width:1500px;margin:0 auto;padding:10px 22px 60px;color:var(--muted);font-size:.82rem}
+  .tipbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:16px 0}
+  .tipbox h2{margin-top:0;font-size:1.05rem}
+  .tipbox li{margin:5px 0}
+  mark{background:var(--med);color:#2a1d00;padding:0 2px;border-radius:3px}
+  .hidden{display:none !important}
+  .quizbar{position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--line);
+    padding:12px 18px;z-index:60;box-shadow:0 -4px 22px rgba(0,0,0,.3);display:none}
+  .quizbar.show{display:block}
+  .quizwrap{max-width:900px;margin:0 auto}
+  .qprog{font-size:.78rem;color:var(--muted);margin-bottom:4px}
+  .quizq{font-weight:600;margin:4px 0 8px}
+  .quizans{display:none;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:.9rem}
+  .quizans.show{display:block}
+  .quizbtns{display:flex;gap:8px;flex-wrap:wrap}
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+    .grid2{grid-template-columns:1fr}
+  }
+  @media print{
+    header.top,aside,.quizbar,.btn,.reveal{display:none!important}
+    .layout{grid-template-columns:1fr}
+    .ans{display:block!important}
+    details.topic{open:true}
+    body{background:#fff;color:#000}
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<header class="top">
+  <div class="brand">⚗️ Plus Two Chemistry — SAY 2026
+    <small>Kerala DHSE · 60-mark theory · crash revision</small></div>
+  <div class="spacer"></div>
+  <input class="search" id="search" placeholder="🔎 Search topics / questions…" />
+  <div class="timer" id="timer">⏳ <b id="tleft">--:--:--</b> left <button class="btn" id="setexam" style="padding:3px 7px;font-size:.7rem;margin-left:6px">set</button></div>
+  <button class="btn" id="quizToggle">🎯 Quiz me</button>
+  <button class="btn" id="themeBtn">☀︎</button>
+  <button class="btn" onclick="window.print()">🖨 Print</button>
+</header>
+
+<div class="layout">
+  <aside id="sidebar"></aside>
+  <main>
+    <div class="hero">
+      <h1>Your 8-hour Chemistry rescue plan</h1>
+      <p>Everything that can show up in the Kerala <b>Plus Two (Class 12) Chemistry SAY exam 2026</b> — every chapter's
+      important topics explained in plain language, how each topic gets asked, and practice questions with full model answers
+      written the way the examiner wants them. Built around the real <b>60-mark theory pattern</b>.</p>
+      <div class="pillrow">
+        <span class="pill">📘 16 chapters</span>
+        <span class="pill">⏱ 2 hrs + 15 min cool-off</span>
+        <span class="pill">✍️ 1 / 2 / 3 / 4-mark questions</span>
+        <span class="pill">✅ Pass mark: 18 / 60 (30%)</span>
+        <span class="pill">🚫 No negative marking</span>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card plan">
+        <h2>⏰ How to spend your 8 hours</h2>
+        <ol>
+          <li><span class="t">0:00–0:20</span> Read the exam-pattern + answer-writing tips at the bottom first. Know how marks are won.</li>
+          <li><span class="t">0:20–3:30</span> <b>Organic chemistry block</b> (Ch 10–13) — highest weightage, most predictable. Learn name-reactions + distinguishing tests cold.</li>
+          <li><span class="t">3:30–5:00</span> <b>Physical block</b> — Electrochemistry, Chemical Kinetics, Solutions, Solid State. Practise the numericals; the formulas repeat.</li>
+          <li><span class="t">5:00–6:30</span> <b>Inorganic block</b> — Coordination Compounds (CFT!), d & f-block (KMnO₄/K₂Cr₂O₇), p-block, Metallurgy.</li>
+          <li><span class="t">6:30–7:30</span> Biomolecules, Polymers, Surface Chemistry, Chemistry in Everyday Life — short, scoring, easy to memorise.</li>
+          <li><span class="t">7:30–8:00</span> Run <b>Quiz me</b>, re-read every "How it's asked" box, sleep if you can.</li>
+        </ol>
+      </div>
+      <div class="card plan">
+        <h2>🎯 If you only have time for the big scorers</h2>
+        <ol>
+          <li><span class="t">Aldehydes/Ketones/Acids</span> — Tollens, Fehling, Iodoform, Aldol, Cannizzaro.</li>
+          <li><span class="t">Coordination Compounds</span> — IUPAC naming, CFT splitting, magnetic moment.</li>
+          <li><span class="t">Electrochemistry</span> — Nernst equation + EMF numericals.</li>
+          <li><span class="t">Chemical Kinetics</span> — first-order numericals, half-life, Arrhenius.</li>
+          <li><span class="t">Alcohols/Phenols/Ethers</span> — phenol acidity, Reimer–Tiemann, Williamson.</li>
+          <li><span class="t">Amines</span> — basicity order, diazonium reactions, distinguishing 1°/2°/3°.</li>
+          <li><span class="t">d & f-block</span> — KMnO₄, K₂Cr₂O₇, lanthanoid contraction.</li>
+          <li><span class="t">Solutions</span> — colligative properties + van't Hoff factor.</li>
+        </ol>
+        <div class="markmap">These eight chapters alone typically cover well over half the paper. Master them first.</div>
+      </div>
+    </div>
+
+    <div id="chapters"></div>
+
+    <div class="tipbox" id="exampattern">
+      <h2>📋 Exam pattern — how the 60 marks are split</h2>
+      <ul>
+        <li><b>Total questions: 31.</b> You don't answer all of them — there is internal choice. Read instructions on the day.</li>
+        <li><b>Q1–5 · 1 mark each</b> (objective / fill-in / match / one-word) — attempt any 4 → 4 marks.</li>
+        <li><b>Q6–15 · 2 marks each</b> (very short) — attempt any 8 → 16 marks.</li>
+        <li><b>Q16–26 · 3 marks each</b> (short) — attempt any 8 → 24 marks.</li>
+        <li><b>Q27–31 · 4 marks each</b> (long) — attempt any 4 → 16 marks.</li>
+        <li><b>Theory total = 60.</b> Internal/practical = 40. Grand total = 100.</li>
+        <li><b>You must score at least 18/60 (30%) in theory to pass.</b> There is <b>no negative marking</b>, so attempt everything.</li>
+      </ul>
+    </div>
+
+    <div class="tipbox">
+      <h2>✍️ How to write answers and grab easy marks</h2>
+      <ul>
+        <li><b>Always draw the structure / equation.</b> In organic questions a correct balanced equation alone can fetch most of the marks even if your words are weak.</li>
+        <li><b>Balance every chemical equation</b> and write conditions over the arrow (catalyst, temperature, reagent). Examiners give a separate mark for conditions.</li>
+        <li><b>Numericals: write the formula first, substitute, then answer with units.</b> You get step marks even if the final number is wrong. Never skip the formula line.</li>
+        <li><b>Definitions: give the one-line definition + one example.</b> "Define + example" pattern wins full 2-mark questions.</li>
+        <li><b>Distinguishing tests: name the reagent + state what each compound does</b> (e.g. "aldehyde gives silver mirror with Tollens', ketone does not").</li>
+        <li><b>Use keywords.</b> Markers look for terms like "nucleophilic addition", "lanthanoid contraction", "colligative", "spectrochemical series". Sprinkle them in.</li>
+        <li><b>Attempt the choice question you know best.</b> With internal choice, pick the version where you can draw a clean diagram.</li>
+        <li><b>Time: ~2 min per mark.</b> Don't over-write a 1-mark answer. Bullet points are fine and faster to mark.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p><b>Sources used to build this (official syllabus + exam pattern):</b></p>
+      <p>
+        <a href="https://school.careers360.com/boards/dhse-kerala/kerala-plus-two-syllabus" target="_blank" rel="noopener">Kerala Plus Two Syllabus & mark distribution — Careers360</a> ·
+        <a href="https://school.careers360.com/boards/dhse-kerala/kerala-dhse-exam-pattern" target="_blank" rel="noopener">DHSE Kerala exam pattern & marking scheme — Careers360</a> ·
+        <a href="https://www.hsslive.co.in/2021/04/plus-two-chemistry-chapter-weightage.html" target="_blank" rel="noopener">Chapter-wise weightage — HSSLive</a> ·
+        <a href="https://www.aplustopper.com/plus-two-chemistry-notes/" target="_blank" rel="noopener">Plus Two Chemistry chapter notes — A Plus Topper</a>
+      </p>
+      <p>Built as original revision material from the standard Kerala/NCERT Class 12 syllabus. Verify the live mark-scheme on
+      <a href="https://www.dhsekerala.gov.in" target="_blank" rel="noopener">dhsekerala.gov.in</a> on exam day. Progress (ticked chapters, exam time) is saved in your browser only. Good luck — you've got this. ⚗️</p>
+    </footer>
+  </main>
+</div>
+
+<div class="quizbar" id="quizbar">
+  <div class="quizwrap">
+    <div class="qprog" id="qprog"></div>
+    <div class="quizq" id="quizq"></div>
+    <div class="quizans" id="quizans"></div>
+    <div class="quizbtns">
+      <button class="btn acc" id="qreveal">Show answer</button>
+      <button class="btn" id="qnext">Next ▸</button>
+      <button class="btn" id="qclose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ====================== CONTENT DATA ====================== */
+const CHAPTERS = [
+{
+  num:1, id:"solid-state", name:"The Solid State", wt:"Core",
+  why:"Easy marks if you memorise the unit-cell formulas and defect types. Almost always one numerical (density / atoms per unit cell).",
+  topics:[
+    {h:"Crystalline vs amorphous solids", b:"<p><b>Crystalline solids</b> have a long-range, regular, repeating arrangement of particles, sharp melting points, definite geometry and are <i>anisotropic</i> (properties differ with direction). Examples: NaCl, diamond, quartz.</p><p><b>Amorphous solids</b> have only short-range order, melt over a range, have no definite shape and are <i>isotropic</i>. Examples: glass, rubber, plastic. They are called <i>pseudo-solids</i> or supercooled liquids.</p>"},
+    {h:"Unit cell & types of cubic cells", b:"<p>The smallest repeating unit of a crystal lattice is the <b>unit cell</b>. Number of atoms per unit cell (Z): contributions — corner atom = 1/8, face atom = 1/2, edge = 1/4, body-centre = 1.</p><ul><li><b>Simple cubic (SC):</b> Z = 1, packing efficiency 52.4%, coordination number 6.</li><li><b>Body-centred cubic (BCC):</b> Z = 2, packing efficiency 68%, coordination number 8.</li><li><b>Face-centred cubic (FCC)/CCP:</b> Z = 4, packing efficiency 74%, coordination number 12.</li></ul>"},
+    {h:"Close packing, voids & radius ratio", b:"<p><b>HCP and CCP/FCC</b> are the closest packings (74% filled). For N close-packed atoms there are <b>N octahedral voids</b> and <b>2N tetrahedral voids</b>.</p><p>Ionic solids: which void the cation occupies depends on the <b>radius ratio</b> r⁺/r⁻ (tetrahedral 0.225–0.414, octahedral 0.414–0.732, cubic 0.732–1).</p>"},
+    {h:"Density of a unit cell", b:"<p>The most common numerical. Use the density formula and remember to convert edge length to cm.</p>"},
+    {h:"Point defects", b:"<p><b>Stoichiometric defects:</b> <i>Schottky</i> (equal cations + anions missing → density decreases, seen in NaCl, KCl) and <i>Frenkel</i> (ion shifts to interstitial site → density unchanged, seen in AgCl, ZnS).</p><p><b>Impurity & non-stoichiometric defects:</b> metal excess (F-centres → colour) and metal deficiency.</p>"},
+    {h:"Electrical & magnetic properties", b:"<p><b>Conductors, insulators, semiconductors</b> (band theory). Doping gives <b>n-type</b> (group 15 impurity, extra electrons) and <b>p-type</b> (group 13 impurity, holes).</p><p>Magnetism: paramagnetic, diamagnetic, ferromagnetic, antiferromagnetic, ferrimagnetic.</p>"}
+  ],
+  formulas:[
+    "Density d = (Z · M) / (a³ · N_A)   — Z = atoms/cell, M = molar mass (g/mol), a = edge (cm), N_A = 6.022×10²³",
+    "Octahedral voids = N ;  Tetrahedral voids = 2N   (N = number of close-packed particles)",
+    "Packing efficiency: SC 52.4% · BCC 68% · FCC/HCP 74%",
+    "Relation in BCC: 4r = √3·a ;  in FCC: 4r = √2·a ;  in SC: 2r = a"
+  ],
+  framing:[
+    "1-mark: 'Which defect lowers density?' (Schottky). 'Coordination number of FCC?' (12).",
+    "2-mark: define Schottky vs Frenkel with one example each.",
+    "3-mark: density numerical — given edge length and type, find atomic mass or density.",
+    "3-mark: explain n-type and p-type semiconductors with the doping element."
+  ],
+  questions:[
+    {m:3, q:"An element has a body-centred cubic structure with edge length 288 pm and density 7.2 g/cm³. Calculate the atomic mass.",
+     a:"<p><b>Formula:</b> d = Z·M/(a³·N_A) ⟹ M = d·a³·N_A / Z.</p><p>BCC ⟹ Z = 2. a = 288 pm = 2.88×10⁻⁸ cm, so a³ = 2.39×10⁻²³ cm³.</p><p>M = (7.2 × 2.39×10⁻²³ × 6.022×10²³) / 2 ≈ <b>51.8 g/mol</b>.</p><p><i>Mark tip:</i> write the formula line, the Z value, and the a→cm conversion — each is a step mark.</p>"},
+    {m:2, q:"Distinguish between Schottky and Frenkel defects.",
+     a:"<ul><li><b>Schottky:</b> equal numbers of cations and anions are missing; density decreases; shown by ionic solids with similar-sized ions (NaCl, KCl, CsCl).</li><li><b>Frenkel:</b> a smaller ion (usually cation) leaves its site and occupies an interstitial site; density unchanged; shown by solids with large size difference (AgCl, ZnS, AgBr).</li></ul>"},
+    {m:1, q:"How many atoms are present in one face-centred cubic unit cell?", a:"<p><b>4 atoms</b> (8 corners × 1/8 + 6 faces × 1/2 = 1 + 3 = 4).</p>"},
+    {m:2, q:"Why are amorphous solids called pseudo-solids or supercooled liquids?",
+     a:"<p>Because they have only short-range order and no sharp melting point — they soften over a range of temperature and tend to flow very slowly like extremely viscous liquids (e.g. old glass panes thicken at the bottom). Structurally they resemble liquids, so they are 'super-cooled liquids'.</p>"}
+  ]
+},
+{
+  num:2, id:"solutions", name:"Solutions", wt:"High",
+  why:"A reliable source of one full numerical (colligative property) plus a definition. Learn the four colligative formulas and van't Hoff factor.",
+  topics:[
+    {h:"Concentration terms", b:"<ul><li><b>Molarity (M)</b> = mol solute / L solution (temperature-dependent).</li><li><b>Molality (m)</b> = mol solute / kg solvent (temperature-independent — preferred for colligative work).</li><li><b>Mole fraction (x)</b> = mol component / total mol.</li><li><b>ppm, mass %, volume %.</b></li></ul>"},
+    {h:"Henry's law & Raoult's law", b:"<p><b>Henry's law:</b> the solubility of a gas in a liquid is proportional to its partial pressure: p = K_H · x. Higher K_H ⟹ lower solubility.</p><p><b>Raoult's law:</b> for a solution of two volatile liquids, the partial vapour pressure of each component is proportional to its mole fraction: p_A = p°_A·x_A. Total pressure = p°_A x_A + p°_B x_B.</p>"},
+    {h:"Ideal & non-ideal solutions", b:"<p><b>Ideal:</b> obey Raoult's law at all concentrations, ΔH_mix = 0, ΔV_mix = 0 (e.g. benzene + toluene).</p><p><b>Positive deviation:</b> weaker A–B forces, higher vapour pressure (ethanol + acetone) → minimum boiling azeotrope.</p><p><b>Negative deviation:</b> stronger A–B forces, lower vapour pressure (chloroform + acetone) → maximum boiling azeotrope.</p>"},
+    {h:"Colligative properties", b:"<p>Properties that depend on the <b>number</b> of solute particles, not their nature:</p><ol><li>Relative lowering of vapour pressure</li><li>Elevation of boiling point (ΔT_b)</li><li>Depression of freezing point (ΔT_f)</li><li>Osmotic pressure (π)</li></ol><p>Used to find molar mass of solute.</p>"},
+    {h:"van't Hoff factor (i) & abnormal molar mass", b:"<p><b>i</b> = (observed colligative effect)/(normal effect) = (no. of particles after dissociation/association)/(particles before).</p><ul><li>Electrolytes that dissociate: i > 1 (NaCl ≈ 2, BaCl₂ ≈ 3).</li><li>Solutes that associate (e.g. acetic acid in benzene → dimer): i < 1.</li></ul>"}
+  ],
+  formulas:[
+    "Relative lowering of VP: (p° − p)/p° = x_solute",
+    "Elevation of boiling point: ΔT_b = i · K_b · m",
+    "Depression of freezing point: ΔT_f = i · K_f · m",
+    "Osmotic pressure: π = i · C · R · T   (C in mol/L, R = 0.0821 L atm K⁻¹mol⁻¹)",
+    "Molar mass from depression: M = (i · K_f · w_B · 1000)/(ΔT_f · w_A)"
+  ],
+  framing:[
+    "2-mark: state Henry's law / Raoult's law with one application.",
+    "3-mark: numerical — calculate molar mass from ΔT_b, ΔT_f or osmotic pressure.",
+    "2-mark: positive vs negative deviation with one example each.",
+    "1-mark: which colligative property is used to measure very large molar masses? (osmotic pressure)."
+  ],
+  questions:[
+    {m:3, q:"1.0 g of a non-electrolyte solute dissolved in 50 g of benzene lowered the freezing point by 0.40 K. K_f for benzene = 5.12 K kg mol⁻¹. Find the molar mass of the solute.",
+     a:"<p><b>Formula:</b> M = (K_f · w_B · 1000)/(ΔT_f · w_A) (i = 1, non-electrolyte).</p><p>M = (5.12 × 1.0 × 1000)/(0.40 × 50) = 5120/20 = <b>256 g/mol</b>.</p>"},
+    {m:2, q:"Define colligative property. Name the four colligative properties.",
+     a:"<p>A <b>colligative property</b> depends only on the <i>number</i> of solute particles in a solution and not on their chemical nature.</p><p>The four are: (1) relative lowering of vapour pressure, (2) elevation of boiling point, (3) depression of freezing point, (4) osmotic pressure.</p>"},
+    {m:2, q:"Why does a solution of chloroform and acetone show negative deviation from Raoult's law?",
+     a:"<p>Acetone and chloroform form <b>intermolecular hydrogen bonds</b> (Cl₃C–H···O=C), so the A–B attractions are stronger than the A–A and B–B attractions in the pure liquids. This lowers the escaping tendency, so the vapour pressure is lower than predicted by Raoult's law → negative deviation (and a maximum-boiling azeotrope).</p>"},
+    {m:1, q:"What is the value of van't Hoff factor for NaCl in water (assuming complete dissociation)?", a:"<p><b>i = 2</b> (NaCl → Na⁺ + Cl⁻).</p>"}
+  ]
+},
+{
+  num:3, id:"electrochemistry", name:"Electrochemistry", wt:"High",
+  why:"Top-priority physical chapter. Expect a Nernst-equation or EMF numerical plus conductance theory. The formulas repeat every year.",
+  topics:[
+    {h:"Galvanic (voltaic) cell & electrode potential", b:"<p>A galvanic cell converts chemical energy into electrical energy. <b>Oxidation at anode (−), reduction at cathode (+).</b> Standard hydrogen electrode (SHE) is the reference, E° = 0 V.</p><p>Cell notation: anode | anode solution || cathode solution | cathode.</p>"},
+    {h:"Cell EMF & Nernst equation", b:"<p>E°_cell = E°_cathode − E°_anode (both as reduction potentials). The Nernst equation gives EMF at non-standard conditions.</p>"},
+    {h:"EMF, Gibbs energy & equilibrium constant", b:"<p>ΔG° = −nFE°_cell links electrochemistry to thermodynamics. A positive E°_cell ⟹ negative ΔG° ⟹ spontaneous. Also E°_cell relates to the equilibrium constant K_c.</p>"},
+    {h:"Conductance & Kohlrausch's law", b:"<p><b>Conductivity (κ)</b> decreases with dilution; <b>molar conductivity (Λ_m)</b> increases with dilution. For strong electrolytes Λ_m vs √c is linear (Debye–Hückel–Onsager). <b>Kohlrausch's law:</b> limiting molar conductivity is the sum of ionic contributions — used to find Λ°_m of weak electrolytes.</p>"},
+    {h:"Electrolysis & Faraday's laws", b:"<p><b>First law:</b> mass deposited ∝ charge (w = Z·I·t). <b>Second law:</b> for the same charge, masses are proportional to equivalent masses. 1 Faraday = 96500 C = charge of 1 mole of electrons.</p>"},
+    {h:"Batteries, fuel cells & corrosion", b:"<p><b>Primary</b> (dry cell, mercury) — not rechargeable. <b>Secondary</b> (lead storage, Ni–Cd) — rechargeable. <b>Fuel cell</b> (H₂–O₂) — continuous, pollution-free. <b>Corrosion</b> of iron is an electrochemical process; prevented by galvanising, painting, sacrificial protection.</p>"}
+  ],
+  formulas:[
+    "E°_cell = E°_cathode − E°_anode",
+    "Nernst (298 K): E_cell = E°_cell − (0.0591/n) · log Q",
+    "ΔG° = −nFE°_cell   (F = 96500 C)",
+    "log K_c = (n · E°_cell)/0.0591",
+    "Molar conductivity: Λ_m = (κ × 1000)/c   (c in mol/L)",
+    "Kohlrausch: Λ°_m = ν₊·λ°₊ + ν₋·λ°₋",
+    "Faraday's first law: w = (M · I · t)/(n · F)"
+  ],
+  framing:[
+    "3-mark: calculate E_cell using the Nernst equation given concentrations.",
+    "3-mark: calculate Λ°_m of a weak electrolyte (e.g. acetic acid) using Kohlrausch's law.",
+    "2-mark: differences between primary and secondary cells / write electrode reactions of a given cell.",
+    "1-mark: value of 1 Faraday / which electrode is the anode in a galvanic cell."
+  ],
+  questions:[
+    {m:3, q:"Calculate the EMF of the cell Zn|Zn²⁺(0.1 M)||Cu²⁺(1.0 M)|Cu at 298 K. Given E°(Zn²⁺/Zn) = −0.76 V, E°(Cu²⁺/Cu) = +0.34 V.",
+     a:"<p><b>E°_cell</b> = E°_cathode − E°_anode = 0.34 − (−0.76) = <b>1.10 V</b>.</p><p>n = 2. Reaction: Zn + Cu²⁺ → Zn²⁺ + Cu, Q = [Zn²⁺]/[Cu²⁺] = 0.1/1.0 = 0.1.</p><p>E_cell = 1.10 − (0.0591/2)·log(0.1) = 1.10 − (0.02955)(−1) = 1.10 + 0.0296 = <b>1.13 V</b>.</p>"},
+    {m:2, q:"State Kohlrausch's law and give one application.",
+     a:"<p><b>Kohlrausch's law:</b> at infinite dilution, the limiting molar conductivity of an electrolyte is the sum of the individual limiting molar conductivities of its cations and anions.</p><p><b>Application:</b> calculating Λ°_m of a weak electrolyte (like acetic acid) which cannot be found by extrapolation; also for finding the degree of dissociation (α = Λ_m/Λ°_m).</p>"},
+    {m:2, q:"Why does molar conductivity increase on dilution while conductivity decreases?",
+     a:"<p>On dilution the number of ions per unit volume falls, so <b>conductivity (κ)</b> — which measures conducting power per unit volume — decreases. But <b>molar conductivity</b> accounts for all ions from one mole of electrolyte; on dilution more of the electrolyte dissociates and ions move more freely, so Λ_m increases and reaches a maximum (Λ°_m) at infinite dilution.</p>"},
+    {m:1, q:"What is the value of one Faraday of charge?", a:"<p><b>96500 C</b> (charge carried by one mole of electrons).</p>"}
+  ]
+},
+{
+  num:4, id:"chemical-kinetics", name:"Chemical Kinetics", wt:"High",
+  why:"Numerical-heavy and predictable. The first-order integrated equation and half-life appear almost every year. Learn order vs molecularity cold.",
+  topics:[
+    {h:"Rate of reaction & rate law", b:"<p><b>Rate</b> = change in concentration per unit time. <b>Rate law</b>: Rate = k[A]^x[B]^y, where x, y are found experimentally. <b>Order</b> = x + y (sum of powers). <b>Molecularity</b> = number of species in an elementary step (always a whole number ≥ 1).</p>"},
+    {h:"Order vs molecularity", b:"<ul><li>Order is experimental, can be 0, fractional, even negative; defined for overall reaction.</li><li>Molecularity is theoretical, a positive integer, defined only for elementary steps.</li><li>The slowest step is the <b>rate-determining step</b>.</li></ul>"},
+    {h:"Integrated rate equations", b:"<p><b>Zero order:</b> [R] = [R]₀ − kt ; units of k = mol L⁻¹ s⁻¹.</p><p><b>First order:</b> k = (2.303/t)·log([R]₀/[R]) ; units of k = s⁻¹.</p>"},
+    {h:"Half-life", b:"<p><b>First order:</b> t₁/₂ = 0.693/k — independent of initial concentration. <b>Zero order:</b> t₁/₂ = [R]₀/2k.</p>"},
+    {h:"Pseudo first order reactions", b:"<p>Reactions that are actually higher order but behave as first order because one reactant (often water) is in large excess and its concentration stays effectively constant. Example: acid hydrolysis of an ester, inversion of cane sugar.</p>"},
+    {h:"Temperature dependence — Arrhenius equation & collision theory", b:"<p>k = A·e^(−Ea/RT). Higher temperature ⟹ more molecules cross the activation-energy barrier ⟹ faster rate (rate roughly doubles per 10 °C). <b>Activation energy (Ea)</b> is the minimum energy needed; a catalyst lowers Ea by providing an alternate path.</p>"}
+  ],
+  formulas:[
+    "First order: k = (2.303/t)·log([R]₀/[R])",
+    "First-order half-life: t₁/₂ = 0.693/k",
+    "Zero order: k = ([R]₀ − [R])/t ;  t₁/₂ = [R]₀/2k",
+    "Arrhenius: k = A·e^(−Ea/RT)",
+    "log(k₂/k₁) = (Ea/2.303R)·(1/T₁ − 1/T₂)"
+  ],
+  framing:[
+    "3-mark: first-order numerical — find k, or time for a given fraction to react, or remaining concentration.",
+    "2-mark: difference between order and molecularity.",
+    "2-mark: explain pseudo first-order reaction with an example.",
+    "1-mark: units of rate constant for a first-order / zero-order reaction."
+  ],
+  questions:[
+    {m:3, q:"A first-order reaction has a rate constant of 1.15×10⁻³ s⁻¹. How long will it take for 5 g of the reactant to reduce to 3 g?",
+     a:"<p><b>Formula:</b> k = (2.303/t)·log([R]₀/[R]) ⟹ t = (2.303/k)·log([R]₀/[R]).</p><p>t = (2.303 / 1.15×10⁻³) · log(5/3) = 2002.6 × log(1.667) = 2002.6 × 0.2219 ≈ <b>444 s</b>.</p>"},
+    {m:2, q:"Distinguish between order and molecularity of a reaction.",
+     a:"<ul><li><b>Order</b> is the sum of the powers of concentration terms in the experimentally-determined rate law; it can be zero, fractional or integral and applies to the overall reaction.</li><li><b>Molecularity</b> is the number of reacting species in an elementary reaction; it is always a whole number and has meaning only for elementary steps.</li></ul>"},
+    {m:2, q:"What is a pseudo first-order reaction? Give one example.",
+     a:"<p>A reaction that is not truly first order but follows first-order kinetics because one reactant is present in such large excess that its concentration remains practically constant. <b>Example:</b> acid-catalysed hydrolysis of ethyl acetate (water is in excess) — CH₃COOC₂H₅ + H₂O → CH₃COOH + C₂H₅OH.</p>"},
+    {m:1, q:"The half-life of a first-order reaction is independent of what?", a:"<p>The <b>initial concentration</b> of the reactant.</p>"}
+  ]
+},
+{
+  num:5, id:"surface-chemistry", name:"Surface Chemistry", wt:"Core",
+  why:"Short, descriptive and high-scoring. Adsorption types, colloids and Hardy–Schulze rule are easy 2–3 mark grabs.",
+  topics:[
+    {h:"Adsorption: physisorption vs chemisorption", b:"<table style='font-size:.85rem'><tr><td><b>Physisorption</b></td><td><b>Chemisorption</b></td></tr></table><ul><li><b>Physisorption:</b> weak van der Waals forces, low enthalpy (20–40 kJ/mol), reversible, multilayer, decreases with temperature, not specific.</li><li><b>Chemisorption:</b> chemical bond, high enthalpy (80–240 kJ/mol), irreversible, monolayer, increases then decreases with temperature, highly specific.</li></ul>"},
+    {h:"Freundlich adsorption isotherm", b:"<p>x/m = k·p^(1/n) (0 < 1/n < 1). At high pressure adsorption becomes independent of pressure (saturation).</p>"},
+    {h:"Catalysis", b:"<p><b>Homogeneous</b> (catalyst same phase) and <b>heterogeneous</b> (different phase, e.g. contact process). <b>Enzyme catalysis</b> is highly specific and works under mild conditions. Catalysts lower activation energy without being consumed.</p>"},
+    {h:"Colloids", b:"<p>Particle size 1–1000 nm. Classified by: physical state (sol, gel, emulsion, aerosol, foam), affinity to medium (<b>lyophilic</b> = solvent-loving, stable; <b>lyophobic</b> = solvent-hating, need stabiliser), and particle type (multimolecular, macromolecular, associated/micelles).</p>"},
+    {h:"Properties of colloids", b:"<ul><li><b>Tyndall effect</b> — scattering of light (path becomes visible).</li><li><b>Brownian motion</b> — zig-zag particle movement.</li><li><b>Electrophoresis</b> — movement of charged colloidal particles in an electric field.</li><li><b>Coagulation</b> — colloid settling on adding electrolyte.</li></ul>"},
+    {h:"Hardy–Schulze rule & emulsions", b:"<p><b>Hardy–Schulze rule:</b> the greater the valency of the coagulating (oppositely charged) ion, the greater its coagulating power. For a negative sol, Al³⁺ > Ba²⁺ > Na⁺.</p><p><b>Emulsions:</b> liquid-in-liquid colloids (O/W like milk, W/O like butter), stabilised by emulsifiers (soap).</p>"}
+  ],
+  formulas:[
+    "Freundlich isotherm: x/m = k·p^(1/n)   (1/n between 0 and 1)",
+    "Coagulating power order (Hardy–Schulze): higher valency of opposite ion ⟹ stronger coagulant"
+  ],
+  framing:[
+    "2-mark: physisorption vs chemisorption (give 2 differences).",
+    "2-mark: lyophilic vs lyophobic colloids / Tyndall effect explanation.",
+    "1-mark: state Hardy–Schulze rule / give an example of O/W emulsion.",
+    "3-mark: explain electrophoresis, coagulation, and Brownian motion."
+  ],
+  questions:[
+    {m:2, q:"Give two differences between physisorption and chemisorption.",
+     a:"<ul><li>Physisorption involves weak van der Waals forces with low enthalpy (20–40 kJ/mol); chemisorption involves chemical bonds with high enthalpy (80–240 kJ/mol).</li><li>Physisorption is reversible and forms multilayers; chemisorption is irreversible and forms a monolayer. Physisorption decreases with rising temperature whereas chemisorption first increases then decreases.</li></ul>"},
+    {m:2, q:"What is the Tyndall effect and why is it shown by colloids but not true solutions?",
+     a:"<p>The <b>Tyndall effect</b> is the scattering of a beam of light by colloidal particles, making the path of light visible. Colloidal particles (1–1000 nm) are large enough to scatter light, while particles in a true solution are too small (< 1 nm) to scatter it, so true solutions show no Tyndall effect.</p>"},
+    {m:1, q:"State the Hardy–Schulze rule.", a:"<p>The coagulating power of an ion increases with its <b>valency</b>; the ion with charge opposite to the sol and higher valency is the most effective coagulant (e.g. Al³⁺ > Ba²⁺ > Na⁺ for a negative sol).</p>"}
+  ]
+},
+{
+  num:6, id:"metallurgy", name:"General Principles & Processes of Isolation of Elements", wt:"Core",
+  why:"Mostly memory-based. Ellingham diagram reasoning and named processes (roasting, calcination, electrolytic reduction) are common.",
+  topics:[
+    {h:"Concentration of ore", b:"<p>Removing gangue: <b>hydraulic washing</b> (gravity), <b>magnetic separation</b>, <b>froth flotation</b> (sulphide ores, uses collectors/depressants), <b>leaching</b> (chemical, e.g. bauxite with NaOH, gold/silver with NaCN).</p>"},
+    {h:"Conversion to oxide", b:"<ul><li><b>Calcination:</b> heating in limited air to remove moisture/CO₂ from carbonate or hydrated ores.</li><li><b>Roasting:</b> heating sulphide ore strongly in excess air to form oxide + SO₂.</li></ul>"},
+    {h:"Reduction — Ellingham diagram", b:"<p>The Ellingham diagram plots ΔG° vs T for oxide formation. A metal/agent whose line is <b>lower</b> can reduce the oxide of a metal whose line is higher. Carbon (C/CO) becomes a good reducing agent at high temperature (its line slopes downward). This explains why coke reduces iron oxide in a blast furnace but not very reactive metals.</p>"},
+    {h:"Electrolytic reduction", b:"<p>Highly reactive metals (Na, Al, Mg) are extracted by electrolysis of their molten salts/oxides. <b>Aluminium — Hall–Héroult process:</b> electrolysis of Al₂O₃ dissolved in molten cryolite (Na₃AlF₆) which lowers the melting point and increases conductivity.</p>"},
+    {h:"Refining", b:"<ul><li><b>Electrolytic refining</b> (Cu, Ag) — impure metal anode, pure metal cathode.</li><li><b>Zone refining</b> (Si, Ge for semiconductors) — based on different solubility of impurities in molten vs solid.</li><li><b>Vapour phase</b> — Mond process (Ni), van Arkel (Ti, Zr).</li></ul>"}
+  ],
+  formulas:[
+    "Roasting (sulphide): 2ZnS + 3O₂ → 2ZnO + 2SO₂",
+    "Calcination (carbonate): CaCO₃ → CaO + CO₂",
+    "Blast furnace: Fe₂O₃ + 3CO → 2Fe + 3CO₂",
+    "Hall–Héroult: 2Al₂O₃ → 4Al + 3O₂ (molten, cryolite)"
+  ],
+  framing:[
+    "2-mark: difference between roasting and calcination with equations.",
+    "3-mark: role of cryolite / extraction of aluminium by Hall–Héroult process.",
+    "2-mark: principle of zone refining / froth flotation.",
+    "1-mark: which reducing agent is used in a blast furnace? (CO / coke)."
+  ],
+  questions:[
+    {m:2, q:"Distinguish between roasting and calcination with one example each.",
+     a:"<p><b>Roasting:</b> the sulphide ore is heated strongly in the presence of excess air to convert it to the oxide. e.g. 2ZnS + 3O₂ → 2ZnO + 2SO₂.</p><p><b>Calcination:</b> the ore (carbonate/hydrated) is heated in limited or no air to drive off CO₂ or water, giving the oxide. e.g. CaCO₃ → CaO + CO₂.</p>"},
+    {m:3, q:"Describe the role of cryolite in the electrolytic extraction of aluminium.",
+     a:"<p>In the Hall–Héroult process, pure Al₂O₃ has a very high melting point (~2050 °C). Dissolving it in molten <b>cryolite (Na₃AlF₆)</b> with some fluorspar: (i) lowers the melting point of the mixture to about 950 °C, (ii) increases the electrical conductivity of the melt, and (iii) makes the Al₂O₃ readily ionise. Aluminium is then deposited at the cathode and O₂ liberated at the carbon anode (which slowly burns away as CO/CO₂).</p>"},
+    {m:1, q:"Name the method used to refine germanium for semiconductor use.", a:"<p><b>Zone refining.</b></p>"}
+  ]
+},
+{
+  num:7, id:"p-block", name:"The p-Block Elements (Groups 15–18)", wt:"Medium",
+  why:"Fact-dense but rewarding. Contact process, preparation of NH₃/HNO₃, structures of oxoacids and Xe compounds recur.",
+  topics:[
+    {h:"Group 15 — Nitrogen family", b:"<p>General trend: oxidation states −3 to +5. <b>Dinitrogen (N₂)</b> is inert due to a strong triple bond. <b>Ammonia (NH₃)</b> — Haber process, pyramidal, basic. <b>Nitric acid (HNO₃)</b> — Ostwald process. <b>Oxides of nitrogen</b> (N₂O, NO, NO₂...). Phosphorus allotropes (white = reactive, red = stable). <b>PCl₃, PCl₅</b> structures (trigonal pyramidal; trigonal bipyramidal). Oxoacids of P (H₃PO₃ dibasic, H₃PO₄ tribasic).</p>"},
+    {h:"Group 16 — Oxygen family", b:"<p><b>Ozone (O₃)</b> — bent, powerful oxidiser. <b>Sulphur dioxide (SO₂)</b>. <b>Sulphuric acid (H₂SO₄) — Contact process</b> (2SO₂ + O₂ ⇌ 2SO₃ over V₂O₅; SO₃ absorbed in H₂SO₄ to give oleum). Oxoacids of sulphur (H₂SO₄, H₂SO₃, H₂S₂O₇).</p>"},
+    {h:"Group 17 — Halogens", b:"<p>Most reactive non-metals; oxidising power F₂ > Cl₂ > Br₂ > I₂. <b>Chlorine</b> — bleaching, prepared from MnO₂ + HCl. <b>HCl.</b> <b>Interhalogens</b> (ClF₃, IF₇). Oxoacids of chlorine (HOCl, HClO₂, HClO₃, HClO₄ — acid strength increases with O). Anomalous behaviour of fluorine.</p>"},
+    {h:"Group 18 — Noble gases", b:"<p>Very low reactivity (stable octet). <b>Xenon fluorides</b> XeF₂ (linear), XeF₄ (square planar), XeF₆; XeO₃ (pyramidal). Used to illustrate VSEPR and hybridisation.</p>"}
+  ],
+  formulas:[
+    "Haber: N₂ + 3H₂ ⇌ 2NH₃ (Fe catalyst, ~450 °C, high P)",
+    "Ostwald (HNO₃): 4NH₃ + 5O₂ → 4NO + 6H₂O ; 2NO + O₂ → 2NO₂ ; 3NO₂ + H₂O → 2HNO₃ + NO",
+    "Contact (H₂SO₄): 2SO₂ + O₂ ⇌ 2SO₃ (V₂O₅) ; SO₃ + H₂SO₄ → H₂S₂O₇ (oleum) ; + H₂O → 2H₂SO₄",
+    "XeF₂ linear (sp³d), XeF₄ square planar (sp³d²), XeF₆ distorted octahedral (sp³d³)"
+  ],
+  framing:[
+    "3-mark: manufacture of H₂SO₄ by the contact process / HNO₃ by the Ostwald process (with equations).",
+    "2-mark: why is N₂ inert? / why does fluorine show anomalous behaviour?",
+    "2-mark: structures and hybridisation of XeF₂, XeF₄, XeF₆.",
+    "1-mark: shape of NH₃ / which is the strongest oxoacid of chlorine? (HClO₄)."
+  ],
+  questions:[
+    {m:3, q:"Describe the manufacture of sulphuric acid by the Contact process.",
+     a:"<p><b>Step 1:</b> Sulphur or a sulphide is burnt to SO₂: S + O₂ → SO₂.</p><p><b>Step 2 (key step):</b> SO₂ is oxidised to SO₃ over a V₂O₅ catalyst at ~450 °C: 2SO₂ + O₂ ⇌ 2SO₃ (exothermic, so moderate temperature and high pressure favour SO₃).</p><p><b>Step 3:</b> SO₃ is absorbed in concentrated H₂SO₄ to form oleum: SO₃ + H₂SO₄ → H₂S₂O₇.</p><p><b>Step 4:</b> Oleum is diluted with water: H₂S₂O₇ + H₂O → 2H₂SO₄. (SO₃ is not absorbed directly in water because it forms a fog.)</p>"},
+    {m:2, q:"Why is dinitrogen (N₂) chemically inert at room temperature?",
+     a:"<p>The two nitrogen atoms are held by a very strong <b>N≡N triple bond</b> with a high bond dissociation enthalpy (~941 kJ/mol). A large amount of energy is needed to break this bond, so N₂ does not react easily under ordinary conditions.</p>"},
+    {m:2, q:"Give the shapes and hybridisation of XeF₂ and XeF₄.",
+     a:"<p><b>XeF₂:</b> linear shape, sp³d hybridisation (3 lone pairs in equatorial positions).</p><p><b>XeF₄:</b> square planar shape, sp³d² hybridisation (2 lone pairs above and below the plane).</p>"},
+    {m:1, q:"What is the shape of the ammonia (NH₃) molecule?", a:"<p><b>Trigonal pyramidal</b> (sp³ hybridised with one lone pair).</p>"}
+  ]
+},
+{
+  num:8, id:"d-f-block", name:"The d- and f-Block Elements", wt:"High",
+  why:"Reliable scorer. Properties of transition metals + the prep/properties of KMnO₄ and K₂Cr₂O₇ + lanthanoid contraction are near-certain.",
+  topics:[
+    {h:"General characteristics of transition elements", b:"<ul><li>Partly filled d-orbitals in the element or its ions.</li><li><b>Variable oxidation states</b> (because (n−1)d and ns energies are close).</li><li><b>Coloured ions</b> (d–d transitions).</li><li><b>Paramagnetism</b> (unpaired d electrons).</li><li>Good <b>catalysts</b>, form <b>complexes</b>, <b>interstitial compounds</b>, and <b>alloys</b>.</li></ul>"},
+    {h:"Magnetic moment", b:"<p>Spin-only magnetic moment μ = √(n(n+2)) BM, where n = number of unpaired electrons. Used to find unpaired electrons / oxidation state.</p>"},
+    {h:"Potassium permanganate (KMnO₄)", b:"<p>Prepared from pyrolusite (MnO₂): fuse with KOH + air/oxidant → K₂MnO₄ (green), then oxidise/electrolyse → KMnO₄ (purple). Strong oxidising agent in acidic medium (Mn⁷⁺ → Mn²⁺, gains 5 e⁻).</p>"},
+    {h:"Potassium dichromate (K₂Cr₂O₇)", b:"<p>From chromite ore; oxidising agent in acidic medium (Cr⁶⁺ → Cr³⁺, gains 3 e⁻ per Cr, 6 per dichromate). Orange in acid, converts to yellow chromate in base (interconversion equilibrium).</p>"},
+    {h:"Lanthanoids & lanthanoid contraction", b:"<p><b>Lanthanoid contraction:</b> the steady decrease in atomic/ionic radii across the 4f series because the poor shielding by 4f electrons lets the increasing nuclear charge pull the shells inward. <b>Consequences:</b> similarity of 4d and 5d elements (Zr–Hf), difficulty in separating lanthanoids, gradual change in basicity.</p>"},
+    {h:"Actinoids", b:"<p>5f series, all radioactive, show a wider range of oxidation states than lanthanoids; actinoid contraction is greater due to even poorer 5f shielding.</p>"}
+  ],
+  formulas:[
+    "Spin-only magnetic moment: μ = √(n(n+2)) BM   (n = unpaired electrons)",
+    "KMnO₄ in acid: MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+    "K₂Cr₂O₇ in acid: Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O",
+    "Chromate–dichromate: 2CrO₄²⁻ + 2H⁺ ⇌ Cr₂O₇²⁻ + H₂O"
+  ],
+  framing:[
+    "3-mark: preparation and oxidising action of KMnO₄ or K₂Cr₂O₇ (with half-reaction).",
+    "2-mark: what is lanthanoid contraction and its consequences?",
+    "2-mark: calculate spin-only magnetic moment for a given ion (e.g. Fe²⁺, n=4 ⟹ 4.9 BM).",
+    "1-mark: why are transition-metal ions coloured? (d–d transition)."
+  ],
+  questions:[
+    {m:3, q:"What is lanthanoid contraction? Mention two of its consequences.",
+     a:"<p><b>Lanthanoid contraction</b> is the gradual decrease in the atomic and ionic radii of the lanthanoids with increasing atomic number, caused by the poor shielding effect of the 4f electrons, which allows the increasing nuclear charge to draw the electron shells closer.</p><p><b>Consequences:</b> (1) The second and third transition series elements of the same group have almost identical sizes (e.g. Zr and Hf), making them hard to separate. (2) There is a small but steady decrease in the basic strength of the lanthanoid hydroxides across the series.</p>"},
+    {m:2, q:"Calculate the spin-only magnetic moment of the Fe²⁺ ion.",
+     a:"<p>Fe²⁺ = [Ar]3d⁶ ⟹ unpaired electrons n = 4.</p><p>μ = √(n(n+2)) = √(4×6) = √24 ≈ <b>4.90 BM</b>.</p>"},
+    {m:2, q:"Why do transition metals show variable oxidation states?",
+     a:"<p>Because the energies of the (n−1)d and ns orbitals are very close, electrons from both can take part in bonding. So a transition metal can lose different numbers of electrons and exhibit several oxidation states differing by one (e.g. Fe²⁺/Fe³⁺, Mn²⁺ to Mn⁷⁺).</p>"},
+    {m:1, q:"Why are most transition-metal compounds coloured?", a:"<p>Because of <b>d–d electronic transitions</b>: an electron absorbs visible light to jump between split d-orbitals, and the complementary colour is transmitted.</p>"}
+  ]
+},
+{
+  num:9, id:"coordination", name:"Coordination Compounds", wt:"High",
+  why:"One of the highest-yield chapters. IUPAC naming, CFT splitting/CFSE, magnetic behaviour and isomerism are exam favourites.",
+  topics:[
+    {h:"Werner's theory & basic terms", b:"<p><b>Ligand</b> — donor species (Lewis base). <b>Coordination number</b> — number of donor atoms bonded to the central metal. <b>Denticity</b>: monodentate (Cl⁻, NH₃), bidentate (en, ox), polydentate (EDTA, hexadentate). <b>Chelate</b> — ring formed by a polydentate ligand (extra stability). <b>Ambidentate</b> ligand can bind through either of two atoms (–NO₂ vs –ONO; –SCN vs –NCS).</p>"},
+    {h:"IUPAC nomenclature", b:"<p>Rules: name ligands alphabetically before the metal; anionic ligands end in -o (chlorido, cyanido); use di/tri or bis/tris for multiples; cation named first then anion; oxidation state of metal in Roman numerals; complex anion ends in -ate.</p>"},
+    {h:"Isomerism", b:"<p><b>Structural:</b> ionisation, linkage, coordination, hydrate. <b>Stereoisomerism:</b> geometrical (cis–trans), optical (mirror images).</p>"},
+    {h:"Valence Bond Theory (VBT)", b:"<p>Explains shape & magnetism via hybridisation: octahedral d²sp³ (inner, low-spin) or sp³d² (outer, high-spin); tetrahedral sp³; square planar dsp².</p>"},
+    {h:"Crystal Field Theory (CFT)", b:"<p>Ligands split the d-orbitals. <b>Octahedral:</b> t₂g (lower) and e_g (upper), splitting Δ₀. <b>Tetrahedral:</b> reversed, Δ_t = (4/9)Δ₀ (always high-spin). <b>Spectrochemical series</b> ranks ligand field strength: I⁻ < Br⁻ < Cl⁻ < F⁻ < OH⁻ < H₂O < NH₃ < en < CN⁻ ≈ CO. Strong-field ligands ⟹ large Δ ⟹ pairing ⟹ low-spin; weak-field ⟹ high-spin. Colour and magnetism follow from the splitting.</p>"},
+    {h:"Stability & applications", b:"<p>Chelate effect increases stability. Applications: EDTA in water-hardness titration, haemoglobin (Fe), chlorophyll (Mg), vitamin B₁₂ (Co), extraction of metals (cyanide process), electroplating.</p>"}
+  ],
+  formulas:[
+    "CFSE (octahedral) = (−0.4 × n_t2g + 0.6 × n_eg) Δ₀  (+ pairing energy terms)",
+    "Δ_t = (4/9) Δ₀  — tetrahedral splitting always smaller ⟹ high spin",
+    "Magnetic moment μ = √(n(n+2)) BM (n = unpaired electrons in the complex)",
+    "Spectrochemical (weak→strong): I⁻<Br⁻<Cl⁻<F⁻<OH⁻<H₂O<NH₃<en<CN⁻≈CO"
+  ],
+  framing:[
+    "3-mark: write IUPAC name OR formula of given complexes; predict shape/magnetism using CFT.",
+    "3-mark: explain why [Fe(CN)₆]⁴⁻ is low-spin/diamagnetic but [FeF₆]³⁻ is high-spin (spectrochemical series).",
+    "2-mark: define ligand, coordination number, chelate, ambidentate ligand.",
+    "2-mark: cis–trans / optical isomerism with an example.",
+    "1-mark: name the donor atom in NH₃ as a ligand / which is a stronger field ligand, CN⁻ or H₂O?"
+  ],
+  questions:[
+    {m:3, q:"Using crystal field theory, explain why [Co(NH₃)₆]³⁺ is diamagnetic while [CoF₆]³⁻ is paramagnetic.",
+     a:"<p>Both contain Co³⁺ = d⁶. The geometry is octahedral, so the d-orbitals split into t₂g and e_g with gap Δ₀.</p><p><b>[Co(NH₃)₆]³⁺:</b> NH₃ is a <b>strong-field</b> ligand (high in the spectrochemical series), so Δ₀ is large — larger than the pairing energy. All six electrons pair up in the t₂g set (t₂g⁶ e_g⁰). No unpaired electrons ⟹ <b>diamagnetic</b>, low-spin.</p><p><b>[CoF₆]³⁻:</b> F⁻ is a <b>weak-field</b> ligand, so Δ₀ is small. Electrons fill all five d-orbitals before pairing (t₂g⁴ e_g²), leaving 4 unpaired electrons ⟹ <b>paramagnetic</b>, high-spin.</p>"},
+    {m:3, q:"Write the IUPAC names of: (a) K₄[Fe(CN)₆]  (b) [Cr(NH₃)₆]Cl₃  (c) [Co(en)₃]Cl₃.",
+     a:"<p>(a) <b>Potassium hexacyanidoferrate(II)</b></p><p>(b) <b>Hexaamminechromium(III) chloride</b></p><p>(c) <b>Tris(ethane-1,2-diamine)cobalt(III) chloride</b></p><p><i>Tip:</i> ligands alphabetical, anionic ligands end -o, complex anion ends -ate, oxidation state in Roman numerals.</p>"},
+    {m:2, q:"Define a chelate and an ambidentate ligand with one example each.",
+     a:"<p><b>Chelate:</b> a ring structure formed when a polydentate ligand binds to a metal through two or more donor atoms, e.g. ethylenediamine (en) forming a five-membered ring. It gives extra stability (chelate effect).</p><p><b>Ambidentate ligand:</b> a monodentate ligand that can coordinate through either of two different donor atoms, e.g. NO₂⁻ (through N as nitrito-N or O as nitrito-O) and SCN⁻ (through S or N).</p>"},
+    {m:1, q:"Which is the stronger field ligand: H₂O or CN⁻?", a:"<p><b>CN⁻</b> (it is much higher in the spectrochemical series).</p>"}
+  ]
+},
+{
+  num:10, id:"haloalkanes", name:"Haloalkanes and Haloarenes", wt:"High",
+  why:"Mechanisms are gold here. SN1 vs SN2, optical inversion, and the low reactivity of haloarenes are repeat questions.",
+  topics:[
+    {h:"Nomenclature & classification", b:"<p>Classify as 1°/2°/3° and as alkyl/allyl/benzyl/vinyl/aryl halides. Haloalkanes have C(sp³)–X; haloarenes have C(sp²)–X attached to an aromatic ring.</p>"},
+    {h:"Preparation", b:"<p>From alcohols (with HX, PCl₃, PCl₅, SOCl₂ — SOCl₂ is best, by-products are gases), from alkenes (HX addition, Markovnikov; or halogenation), and Finkelstein/Swarts reactions (halide exchange).</p>"},
+    {h:"Nucleophilic substitution — SN1 vs SN2", b:"<p><b>SN2:</b> one step, bimolecular, rate ∝ [substrate][Nu]; back-side attack ⟹ <b>inversion of configuration (Walden inversion)</b>; favoured by primary halides + strong nucleophile + polar aprotic solvent.</p><p><b>SN1:</b> two steps via carbocation, unimolecular, rate ∝ [substrate]; gives <b>racemisation</b>; favoured by tertiary halides + polar protic solvent. Reactivity SN1: 3° > 2° > 1°.</p>"},
+    {h:"Elimination (β-elimination)", b:"<p>Dehydrohalogenation with alcoholic KOH gives alkenes; <b>Saytzeff rule</b> — the more substituted (more stable) alkene predominates.</p>"},
+    {h:"Reactivity of haloarenes", b:"<p>Aryl halides are much <b>less reactive</b> towards nucleophilic substitution because of (i) resonance/partial double-bond character of C–X, (ii) sp² carbon (more electronegative, shorter stronger bond), and (iii) repulsion between the nucleophile and the electron-rich ring.</p>"},
+    {h:"Polyhalogen compounds", b:"<p>Uses and concerns: <b>chloroform</b> (CHCl₃, forms poisonous phosgene on air-oxidation), <b>CCl₄</b>, <b>DDT</b> (persistent insecticide), <b>freons</b> (CFCs — ozone depletion).</p>"}
+  ],
+  formulas:[
+    "Alcohol → halide (best): R–OH + SOCl₂ → R–Cl + SO₂ + HCl",
+    "SN2: rate = k[R–X][Nu], inversion; SN1: rate = k[R–X], racemisation",
+    "Reactivity SN1: 3° > 2° > 1° ;  SN2: 1° > 2° > 3°",
+    "Dehydrohalogenation: R–CH₂–CHX–R' + alc.KOH → alkene (Saytzeff)"
+  ],
+  framing:[
+    "3-mark: distinguish SN1 and SN2 mechanisms (with rate law and stereochemistry).",
+    "2-mark: why are haloarenes less reactive than haloalkanes towards nucleophilic substitution?",
+    "2-mark: what is Walden inversion / Saytzeff rule?",
+    "1-mark: best reagent to convert an alcohol to a chloroalkane (SOCl₂)."
+  ],
+  questions:[
+    {m:3, q:"Compare SN1 and SN2 reaction mechanisms with respect to molecularity, kinetics, stereochemistry and substrate preference.",
+     a:"<table style='font-size:.85rem;border-collapse:collapse'><tr><td><b></b></td><td><b>SN1</b></td><td><b>SN2</b></td></tr></table><ul><li><b>Steps/molecularity:</b> SN1 = two steps, unimolecular (carbocation intermediate); SN2 = one step, bimolecular.</li><li><b>Rate law:</b> SN1 rate = k[R–X]; SN2 rate = k[R–X][Nu].</li><li><b>Stereochemistry:</b> SN1 gives racemisation; SN2 gives inversion (Walden inversion).</li><li><b>Substrate:</b> SN1 favoured by 3° halides (stable carbocation); SN2 favoured by 1° halides (less steric hindrance).</li></ul>"},
+    {m:2, q:"Why is chlorobenzene less reactive than chloromethane towards nucleophilic substitution?",
+     a:"<p>In chlorobenzene the C–Cl bond has <b>partial double-bond character</b> due to resonance of the chlorine lone pair into the ring, making it shorter and stronger. The carbon is also <b>sp² hybridised</b> (more electronegative, holds the bond tightly), and the electron-rich ring repels the incoming nucleophile. All three factors make substitution difficult, unlike in chloromethane.</p>"},
+    {m:2, q:"What is the Saytzeff rule? Illustrate with the dehydrohalogenation of 2-bromobutane.",
+     a:"<p><b>Saytzeff rule:</b> in an elimination reaction, the alkene that is more highly substituted (and hence more stable) is formed as the major product. From 2-bromobutane with alcoholic KOH, <b>but-2-ene</b> (more substituted) is the major product over but-1-ene.</p>"},
+    {m:1, q:"Which reagent best converts ethanol to chloroethane with the cleanest by-products?", a:"<p><b>Thionyl chloride (SOCl₂)</b> — the by-products SO₂ and HCl are gases that escape, giving pure product.</p>"}
+  ]
+},
+{
+  num:11, id:"alcohols", name:"Alcohols, Phenols and Ethers", wt:"High",
+  why:"Heavy organic chapter. Acidity of phenol, Reimer–Tiemann, Kolbe, Williamson synthesis and distinguishing tests are near-certain.",
+  topics:[
+    {h:"Preparation of alcohols & phenols", b:"<p><b>Alcohols:</b> hydration of alkenes (Markovnikov / hydroboration-anti-Markovnikov), reduction of carbonyls, Grignard reagent + carbonyl. <b>Phenols:</b> from cumene (cumene → phenol + acetone), from chlorobenzene (Dow process), from diazonium salts.</p>"},
+    {h:"Acidity of phenol vs alcohol", b:"<p>Phenol is far more acidic than alcohols because the <b>phenoxide ion is resonance-stabilised</b> (negative charge delocalised into the ring). Electron-withdrawing groups (–NO₂, especially ortho/para) increase acidity; electron-donating groups decrease it.</p>"},
+    {h:"Reactions of alcohols", b:"<p>Esterification (with acids), dehydration (to alkenes, conc. H₂SO₄), oxidation (1° → aldehyde → acid; 2° → ketone; 3° resists), reaction with Na (H₂ evolved), Lucas test (distinguishes 1°/2°/3°).</p>"},
+    {h:"Reactions of phenols", b:"<p>Electrophilic substitution is easy (–OH is activating, o/p-directing): bromination, nitration. <b>Kolbe's reaction</b> (phenol → salicylic acid via CO₂). <b>Reimer–Tiemann reaction</b> (phenol + CHCl₃ + KOH → salicylaldehyde). Reaction with FeCl₃ gives a violet colour (test for phenol).</p>"},
+    {h:"Ethers — Williamson synthesis", b:"<p><b>Williamson ether synthesis:</b> alkoxide + primary alkyl halide → ether (SN2; use primary halide to avoid elimination). Ethers undergo C–O cleavage with HI/HBr.</p>"}
+  ],
+  formulas:[
+    "Williamson: R–O⁻Na⁺ + R'–X → R–O–R' + NaX (use 1° R'X)",
+    "Kolbe: sodium phenoxide + CO₂ (high P) → sodium salicylate → salicylic acid",
+    "Reimer–Tiemann: phenol + CHCl₃ + aq. KOH → salicylaldehyde (–CHO at ortho)",
+    "Oxidation: 1° alcohol → aldehyde → carboxylic acid; 2° alcohol → ketone"
+  ],
+  framing:[
+    "3-mark: explain why phenol is more acidic than ethanol; effect of substituents.",
+    "2-mark: Reimer–Tiemann / Kolbe reaction with equation.",
+    "2-mark: Williamson synthesis — why use a primary halide?",
+    "2-mark: distinguish 1°, 2°, 3° alcohols (Lucas test) / test for phenol (FeCl₃).",
+    "1-mark: product of oxidation of a secondary alcohol (ketone)."
+  ],
+  questions:[
+    {m:3, q:"Explain why phenol is more acidic than ethanol. How do nitro groups affect the acidity of phenol?",
+     a:"<p>On losing a proton, phenol gives the <b>phenoxide ion</b> in which the negative charge is delocalised over the ring by resonance, making it stable; ethanol gives the ethoxide ion where the charge is localised on oxygen and is destabilised by the electron-donating ethyl group. Greater anion stability ⟹ stronger acid, so phenol (pKa ≈ 10) is far more acidic than ethanol (pKa ≈ 16).</p><p><b>Nitro groups</b> are electron-withdrawing; at the ortho/para positions they further delocalise the negative charge of the phenoxide ion, stabilising it. So nitrophenols are more acidic, and 2,4,6-trinitrophenol (picric acid) is a strong acid.</p>"},
+    {m:2, q:"Write the Reimer–Tiemann reaction with equation.",
+     a:"<p>When phenol is treated with chloroform (CHCl₃) and aqueous KOH at ~340 K, a –CHO group is introduced at the <b>ortho</b> position, giving <b>salicylaldehyde</b> (2-hydroxybenzaldehyde) after acid hydrolysis.</p><p>C₆H₅OH + CHCl₃ + 3KOH → o-HO–C₆H₄–CHO + 3KCl + 2H₂O.</p>"},
+    {m:2, q:"Why is a primary alkyl halide preferred in Williamson's ether synthesis?",
+     a:"<p>Williamson synthesis proceeds by an <b>SN2</b> attack of the alkoxide on the alkyl halide. Alkoxides are strong bases as well as nucleophiles. With secondary or tertiary halides, the base promotes <b>elimination</b> (forming an alkene) instead of substitution. A primary halide has little steric hindrance, so substitution dominates and the ether forms in good yield.</p>"},
+    {m:1, q:"What colour does phenol give with neutral FeCl₃?", a:"<p>A <b>violet/purple</b> colour (test for phenol).</p>"}
+  ]
+},
+{
+  num:12, id:"carbonyl", name:"Aldehydes, Ketones and Carboxylic Acids", wt:"High",
+  why:"Usually the single highest-weightage chapter. Named reactions and distinguishing tests (Tollens, Fehling, Iodoform) are guaranteed marks.",
+  topics:[
+    {h:"Nucleophilic addition", b:"<p>The carbonyl carbon (δ+) is attacked by nucleophiles. <b>Reactivity:</b> aldehydes > ketones (less steric hindrance, less +I from one R group). Addition of HCN (cyanohydrin), NaHSO₃, alcohols (acetal), ammonia derivatives (imines, oximes, hydrazones).</p>"},
+    {h:"Aldol condensation", b:"<p>Carbonyl compounds with α-hydrogen, in dilute base, give a β-hydroxy carbonyl (aldol) which can dehydrate to an α,β-unsaturated carbonyl. Cross-aldol uses two different partners.</p>"},
+    {h:"Cannizzaro reaction", b:"<p>Aldehydes with <b>no α-hydrogen</b> (e.g. HCHO, benzaldehyde) undergo disproportionation in concentrated base: one molecule is oxidised to the acid (salt) and another reduced to the alcohol.</p>"},
+    {h:"Reduction reactions", b:"<p><b>Clemmensen</b> (Zn-Hg/HCl) and <b>Wolff–Kishner</b> (NH₂NH₂/KOH) both reduce C=O to CH₂. LiAlH₄/NaBH₄ reduce carbonyls to alcohols.</p>"},
+    {h:"Distinguishing tests", b:"<ul><li><b>Tollens' reagent</b> (ammoniacal AgNO₃): aldehyde gives a silver mirror; ketone does not.</li><li><b>Fehling's solution</b>: aliphatic aldehyde gives a red-brown Cu₂O precipitate; ketone does not.</li><li><b>Iodoform test</b> (I₂/NaOH): positive for ethanal and methyl ketones (CH₃CO– group) and ethanol — yellow CHI₃ precipitate.</li></ul>"},
+    {h:"Carboxylic acids", b:"<p>Acidity is due to <b>resonance-stabilised carboxylate ion</b>; electron-withdrawing groups (Cl) increase acidity (e.g. trichloroacetic > acetic). Reactions: salt formation, esterification, conversion to acid chlorides/anhydrides/amides. <b>HVZ reaction</b> (α-halogenation with X₂/red P).</p>"}
+  ],
+  formulas:[
+    "Tollens': RCHO + 2[Ag(NH₃)₂]⁺ + 3OH⁻ → RCOO⁻ + 2Ag↓ (mirror) + ...",
+    "Iodoform: CH₃CO–R (or CH₃CH(OH)R) + 3I₂ + 4NaOH → CHI₃↓ + RCOONa + ...",
+    "Cannizzaro: 2HCHO + NaOH → CH₃OH + HCOONa (no α-H)",
+    "Aldol: 2CH₃CHO --(dil.NaOH)--> CH₃CH(OH)CH₂CHO → CH₃CH=CHCHO + H₂O",
+    "Acidity: Cl₃C–COOH > Cl₂CH–COOH > ClCH₂–COOH > CH₃COOH"
+  ],
+  framing:[
+    "3-mark: distinguish given pairs by chemical tests (e.g. ethanal vs propanone, acetophenone vs benzophenone).",
+    "3-mark: write/explain Aldol, Cannizzaro, Clemmensen, Wolff–Kishner with equations.",
+    "2-mark: why are aldehydes more reactive than ketones towards nucleophilic addition?",
+    "2-mark: which compounds give a positive iodoform test?",
+    "1-mark: reagent for the silver-mirror test (Tollens')."
+  ],
+  questions:[
+    {m:3, q:"How would you distinguish between (a) ethanal and propanone, and (b) propanal and propanone using chemical tests?",
+     a:"<p><b>(a) Ethanal (CH₃CHO) vs propanone (CH₃COCH₃):</b> both give a positive iodoform test, so use <b>Tollens' reagent</b> — ethanal (an aldehyde) gives a silver mirror, propanone (a ketone) does not.</p><p><b>(b) Propanal vs propanone:</b> use <b>Fehling's solution</b> — propanal (aldehyde) gives a red-brown precipitate of Cu₂O; propanone gives no reaction. Alternatively Tollens' (propanal → silver mirror).</p>"},
+    {m:3, q:"What is the Cannizzaro reaction? Write it for benzaldehyde and explain why benzaldehyde undergoes it but acetaldehyde does not.",
+     a:"<p>The <b>Cannizzaro reaction</b> is the base-induced disproportionation of an aldehyde that has <b>no α-hydrogen</b>: one molecule is oxidised to the carboxylate and another reduced to the alcohol.</p><p>2C₆H₅CHO + conc. NaOH → C₆H₅COONa + C₆H₅CH₂OH (sodium benzoate + benzyl alcohol).</p><p>Benzaldehyde has no α-hydrogen, so it cannot undergo aldol condensation and instead disproportionates. Acetaldehyde has α-hydrogens, so it prefers <b>aldol condensation</b> and does not give the Cannizzaro reaction.</p>"},
+    {m:2, q:"Why are aldehydes more reactive than ketones towards nucleophilic addition?",
+     a:"<p>(1) <b>Electronic:</b> a ketone has two electron-donating alkyl/aryl groups that reduce the positive charge on the carbonyl carbon, whereas an aldehyde has only one, so the aldehyde carbon is more electrophilic. (2) <b>Steric:</b> the two bulky groups in a ketone hinder the approach of the nucleophile more than the one group in an aldehyde. Both effects make aldehydes react faster.</p>"},
+    {m:1, q:"Which reagent gives a silver mirror with aldehydes?", a:"<p><b>Tollens' reagent</b> (ammoniacal silver nitrate).</p>"}
+  ]
+},
+{
+  num:13, id:"amines", name:"Amines", wt:"High",
+  why:"Predictable scorer. Basicity order, preparation (Hoffmann, Gabriel), and diazonium-salt reactions appear most years.",
+  topics:[
+    {h:"Classification & preparation", b:"<p>1°, 2°, 3° amines and quaternary salts. Preparation: reduction of nitro compounds/nitriles/amides, ammonolysis of alkyl halides, <b>Gabriel phthalimide synthesis</b> (pure 1° amines only), <b>Hoffmann bromamide degradation</b> (amide → 1° amine with one fewer carbon).</p>"},
+    {h:"Basicity of amines", b:"<p>Amines are basic (lone pair on N). In the gas phase basicity follows electron density, but in <b>aqueous solution</b> the order is governed by inductive effect + steric + solvation: typically 2° > 1° > 3° for many simple amines. <b>Aromatic amines (aniline) are weaker bases</b> than aliphatic amines because the N lone pair is delocalised into the ring.</p>"},
+    {h:"Reactions of amines", b:"<p>Salt formation, acylation, reaction with nitrous acid (1° aliphatic → alcohol + N₂; 1° aromatic → diazonium salt), <b>carbylamine test</b> (1° amine + CHCl₃ + KOH → foul-smelling isocyanide — test for 1° amines), <b>Hinsberg's test</b> (distinguishes 1°/2°/3°).</p>"},
+    {h:"Diazonium salts", b:"<p>Aryl diazonium salts (Ar–N₂⁺) are versatile intermediates. <b>Sandmeyer/Gattermann</b> (replace N₂⁺ by Cl, Br, CN), replacement by OH, H, I, F; <b>coupling reactions</b> with phenols/amines give azo dyes. They are key to making substituted aromatics that are hard to get directly.</p>"}
+  ],
+  formulas:[
+    "Hoffmann bromamide: R–CONH₂ + Br₂ + 4NaOH → R–NH₂ + Na₂CO₃ + 2NaBr + 2H₂O (one C lost)",
+    "Gabriel: phthalimide → (KOH, R–X) → N-alkyl phthalimide → (hydrolysis) → R–NH₂ (pure 1°)",
+    "Diazotisation: Ar–NH₂ + NaNO₂ + 2HCl → Ar–N₂⁺Cl⁻ + NaCl + 2H₂O (0–5 °C)",
+    "Carbylamine (1° amine test): R–NH₂ + CHCl₃ + 3KOH → R–NC + 3KCl + 3H₂O"
+  ],
+  framing:[
+    "3-mark: arrange amines in order of basic strength and justify (aniline vs methylamine etc.).",
+    "3-mark: synthetic uses of diazonium salts (Sandmeyer, coupling) with equations.",
+    "2-mark: Gabriel synthesis / Hoffmann bromamide degradation.",
+    "2-mark: distinguish 1°, 2°, 3° amines (Hinsberg / carbylamine).",
+    "1-mark: why can't aromatic amines be prepared by the Gabriel synthesis? (aryl halides don't undergo SN2)."
+  ],
+  questions:[
+    {m:3, q:"Arrange the following in increasing order of basic strength in aqueous solution and justify: aniline, methylamine, ammonia.",
+     a:"<p><b>Order:</b> aniline < ammonia < methylamine.</p><p><b>Aniline</b> is the weakest: the nitrogen lone pair is delocalised into the benzene ring by resonance, so it is less available for donation. <b>Methylamine</b> is the strongest: the electron-donating (+I) methyl group increases electron density on nitrogen, making the lone pair more available and the conjugate acid more stable. Ammonia lies in between.</p>"},
+    {m:3, q:"Give the synthetic importance of diazonium salts with two example reactions.",
+     a:"<p>Aryl diazonium salts let us replace the –N₂⁺ group with many groups that are hard to introduce directly, giving a wide range of substituted aromatics.</p><p><b>Sandmeyer reaction:</b> Ar–N₂⁺Cl⁻ + CuCl → Ar–Cl + N₂ (also gives Ar–Br, Ar–CN with the right Cu salt).</p><p><b>Coupling reaction:</b> Ar–N₂⁺ + phenol → p-hydroxyazobenzene (an azo dye). These reactions are central to the manufacture of dyes.</p>"},
+    {m:2, q:"Describe the carbylamine test and state what it identifies.",
+     a:"<p>When a <b>primary amine</b> is heated with chloroform and alcoholic KOH, it forms an <b>isocyanide (carbylamine)</b> with an extremely offensive smell: R–NH₂ + CHCl₃ + 3KOH → R–NC + 3KCl + 3H₂O. Secondary and tertiary amines do not give this smell, so the test specifically identifies primary amines.</p>"},
+    {m:1, q:"Which reaction converts an amide to a primary amine with one fewer carbon atom?", a:"<p><b>Hoffmann bromamide degradation</b> (with Br₂ + NaOH).</p>"}
+  ]
+},
+{
+  num:14, id:"biomolecules", name:"Biomolecules", wt:"Medium",
+  why:"Short and very scoring — pure memory. Glucose reactions, peptide bond, denaturation, DNA vs RNA are common 2–3 mark items.",
+  topics:[
+    {h:"Carbohydrates", b:"<p>Classified as <b>monosaccharides</b> (glucose, fructose), <b>disaccharides</b> (sucrose — non-reducing; maltose, lactose — reducing), <b>polysaccharides</b> (starch, cellulose, glycogen). Glucose is an aldohexose; it does not react with Schiff's reagent or NaHSO₃ (suggesting a cyclic hemiacetal form). Anomers (α/β), glycosidic linkage.</p>"},
+    {h:"Proteins", b:"<p>Made of <b>α-amino acids</b> joined by <b>peptide (amide) bonds</b>. Amino acids exist as <b>zwitterions</b> at the isoelectric point. Structure levels: primary (sequence), secondary (α-helix, β-sheet via H-bonds), tertiary, quaternary. <b>Denaturation</b> destroys secondary/tertiary structure (heat, acid) — function lost, e.g. boiling an egg.</p>"},
+    {h:"Enzymes & vitamins", b:"<p><b>Enzymes</b> are biological catalysts (mostly proteins), highly specific. <b>Vitamins</b>: fat-soluble (A, D, E, K) and water-soluble (B group, C). Deficiency diseases (scurvy — C, rickets — D, night blindness — A).</p>"},
+    {h:"Nucleic acids", b:"<p><b>DNA</b> and <b>RNA</b> are polymers of nucleotides (base + sugar + phosphate). DNA: deoxyribose, bases A-T-G-C, double helix; carries genetic information. RNA: ribose, bases A-U-G-C, usually single-stranded; involved in protein synthesis.</p>"}
+  ],
+  formulas:[
+    "Peptide bond: –CO–NH– (formed between –COOH of one amino acid and –NH₂ of the next, losing H₂O)",
+    "DNA bases pair: Adenine–Thymine, Guanine–Cytosine; RNA has Uracil instead of Thymine",
+    "Glucose: aldohexose, CHO–(CHOH)₄–CH₂OH; cyclic pyranose hemiacetal (α/β anomers)"
+  ],
+  framing:[
+    "2-mark: differences between DNA and RNA.",
+    "2-mark: what is a peptide bond / zwitterion / denaturation of proteins?",
+    "2-mark: distinguish reducing and non-reducing sugars / why is sucrose non-reducing?",
+    "1-mark: which vitamin deficiency causes scurvy? (vitamin C)."
+  ],
+  questions:[
+    {m:2, q:"Give two differences between DNA and RNA.",
+     a:"<ul><li>DNA contains the sugar <b>deoxyribose</b> and the base thymine; RNA contains <b>ribose</b> and uracil (instead of thymine).</li><li>DNA is usually <b>double-stranded</b> (double helix) and stores genetic information; RNA is usually <b>single-stranded</b> and takes part in protein synthesis.</li></ul>"},
+    {m:2, q:"What is denaturation of a protein? Give one example.",
+     a:"<p><b>Denaturation</b> is the loss of the native secondary and tertiary structure of a protein (by heat, change in pH, or chemicals) while the primary structure (sequence) stays intact. The protein loses its biological activity. <b>Example:</b> coagulation of egg white (albumin) on boiling, or curdling of milk.</p>"},
+    {m:2, q:"Why is sucrose called a non-reducing sugar?",
+     a:"<p>In sucrose the reducing groups of glucose (its aldehyde/anomeric –OH) and fructose (its keto/anomeric –OH) are both involved in the <b>glycosidic linkage</b>. Because no free reducing (anomeric) group is available, sucrose cannot reduce Tollens' or Fehling's reagent, so it is non-reducing.</p>"},
+    {m:1, q:"Deficiency of which vitamin causes scurvy?", a:"<p><b>Vitamin C</b> (ascorbic acid).</p>"}
+  ]
+},
+{
+  num:15, id:"polymers", name:"Polymers", wt:"Core",
+  why:"Easy, descriptive marks. Classification, addition vs condensation, and naming the monomers of common polymers are frequent.",
+  topics:[
+    {h:"Classification of polymers", b:"<p>By <b>source:</b> natural (rubber, cellulose), semi-synthetic (cellulose acetate), synthetic (nylon). By <b>structure:</b> linear, branched, cross-linked. By <b>mode of polymerisation:</b> addition vs condensation. By <b>molecular forces:</b> elastomers, fibres, thermoplastics, thermosetting.</p>"},
+    {h:"Addition vs condensation polymerisation", b:"<p><b>Addition</b> (chain growth): unsaturated monomers add repeatedly with no loss of small molecules — polythene, PVC, polystyrene, Teflon (via free-radical/ionic mechanism). <b>Condensation</b> (step growth): bi-functional monomers combine with elimination of a small molecule (H₂O, HCl) — nylon-6,6, terylene, bakelite.</p>"},
+    {h:"Important polymers & their monomers", b:"<ul><li><b>Polythene</b> — ethene.</li><li><b>PVC</b> — vinyl chloride.</li><li><b>Teflon</b> — tetrafluoroethene.</li><li><b>Nylon-6,6</b> — hexamethylenediamine + adipic acid.</li><li><b>Terylene (Dacron)</b> — ethylene glycol + terephthalic acid.</li><li><b>Bakelite</b> — phenol + formaldehyde.</li><li><b>Natural rubber</b> — isoprene; vulcanisation (with S) hardens it.</li></ul>"},
+    {h:"Copolymers & biodegradable polymers", b:"<p><b>Copolymers</b> form from two different monomers (e.g. Buna-S = butadiene + styrene). <b>Biodegradable polymers</b> decompose naturally — e.g. PHBV, Nylon-2-nylon-6 — reducing pollution.</p>"}
+  ],
+  formulas:[
+    "Polythene: n CH₂=CH₂ → –(CH₂–CH₂)–n  (addition)",
+    "Nylon-6,6: hexamethylenediamine + adipic acid → polyamide + H₂O (condensation)",
+    "Terylene: ethylene glycol + terephthalic acid → polyester + H₂O",
+    "Bakelite: phenol + HCHO → cross-linked phenol-formaldehyde resin"
+  ],
+  framing:[
+    "2-mark: difference between addition and condensation polymers with examples.",
+    "2-mark: name the monomers of nylon-6,6 / terylene / bakelite / Buna-S.",
+    "1-mark: what is vulcanisation? / give one biodegradable polymer.",
+    "2-mark: classify polymers based on molecular forces (elastomer, fibre, thermoplastic, thermoset)."
+  ],
+  questions:[
+    {m:2, q:"Distinguish between addition and condensation polymerisation with one example each.",
+     a:"<p><b>Addition polymerisation:</b> unsaturated monomers join repeatedly without the loss of any small molecule; the polymer has the same empirical formula as the monomer. e.g. polythene from ethene.</p><p><b>Condensation polymerisation:</b> two bi-functional monomers combine with the elimination of a small molecule such as water. e.g. nylon-6,6 from hexamethylenediamine and adipic acid.</p>"},
+    {m:2, q:"Name the monomers used to make (a) nylon-6,6 (b) terylene (c) bakelite.",
+     a:"<p>(a) Nylon-6,6 — <b>hexamethylenediamine and adipic acid</b>.</p><p>(b) Terylene — <b>ethylene glycol and terephthalic acid</b>.</p><p>(c) Bakelite — <b>phenol and formaldehyde</b>.</p>"},
+    {m:1, q:"What is vulcanisation of rubber?", a:"<p>Heating natural rubber with <b>sulphur</b>, which forms cross-links between polymer chains, making the rubber harder, stronger and more elastic.</p>"}
+  ]
+},
+{
+  num:16, id:"everyday-life", name:"Chemistry in Everyday Life", wt:"Core",
+  why:"Pure memory, easy marks. Classes of drugs, soaps vs detergents and food additives are quick to revise and score.",
+  topics:[
+    {h:"Drugs & drug–target interaction", b:"<p>Drugs interact with biological targets (enzymes, receptors). <b>Enzyme inhibitors</b> block active sites; <b>receptor antagonists</b> block the natural messenger. Chemotherapy uses chemicals against disease.</p>"},
+    {h:"Classes of medicines", b:"<ul><li><b>Antacids</b> (reduce stomach acid — ranitidine, Mg(OH)₂).</li><li><b>Antihistamines</b> (allergy — relieve histamine effects).</li><li><b>Tranquilizers / antidepressants</b> (stress, anxiety).</li><li><b>Analgesics</b> (pain relief — aspirin; non-narcotic vs narcotic like morphine).</li><li><b>Antimicrobials / antibiotics</b> (penicillin) — broad/narrow spectrum, bactericidal/bacteriostatic.</li><li><b>Antiseptics</b> (applied to living tissue — Dettol) vs <b>disinfectants</b> (non-living surfaces — phenol).</li></ul>"},
+    {h:"Chemicals in food", b:"<p><b>Artificial sweeteners</b> (saccharin, aspartame), <b>food preservatives</b> (sodium benzoate), antioxidants (BHT, BHA).</p>"},
+    {h:"Cleansing agents — soaps vs detergents", b:"<p><b>Soaps</b> are sodium/potassium salts of long-chain fatty acids; they don't work in hard water (form insoluble scum with Ca²⁺/Mg²⁺). <b>Synthetic detergents</b> work even in hard water; they may be anionic, cationic or non-ionic. Cleansing action: the hydrophobic tail dissolves grease, the hydrophilic head faces water, forming a <b>micelle</b> that is washed away.</p>"}
+  ],
+  formulas:[
+    "Antiseptic vs disinfectant: antiseptic → living tissue (Dettol, dilute phenol); disinfectant → non-living surfaces (conc. phenol)",
+    "Soap: RCOO⁻Na⁺ (fails in hard water) ; Detergent: e.g. sodium lauryl sulphate (works in hard water)",
+    "Cleansing action: micelle — hydrophobic tail into grease, hydrophilic head into water"
+  ],
+  framing:[
+    "2-mark: difference between antiseptics and disinfectants with examples.",
+    "2-mark: difference between soaps and detergents / why soaps fail in hard water.",
+    "2-mark: explain the cleansing action of soap (micelle formation).",
+    "1-mark: give one example of an antacid / artificial sweetener / antibiotic."
+  ],
+  questions:[
+    {m:2, q:"Differentiate between antiseptics and disinfectants with one example each.",
+     a:"<p><b>Antiseptics</b> are applied to living tissues (skin, wounds) to kill or prevent the growth of microorganisms, e.g. Dettol, dilute phenol, tincture of iodine.</p><p><b>Disinfectants</b> are applied to non-living surfaces (floors, drains, instruments), e.g. concentrated phenol, chlorine, SO₂. The same substance can act as either, depending on concentration (e.g. phenol).</p>"},
+    {m:2, q:"Why do soaps not work well in hard water, and how do detergents solve this?",
+     a:"<p>Hard water contains Ca²⁺ and Mg²⁺ ions, which react with soap (sodium salts of fatty acids) to form insoluble <b>scum</b> (calcium/magnesium salts), wasting the soap and reducing lathering. <b>Synthetic detergents</b> are salts of sulphonic acids/sulphates whose calcium and magnesium salts are <b>soluble</b>, so they lather and clean even in hard water.</p>"},
+    {m:2, q:"Explain the cleansing action of soap.",
+     a:"<p>A soap molecule has a long hydrophobic (water-repelling) hydrocarbon tail and a hydrophilic (water-attracting) –COO⁻ head. In water, the tails dissolve into the grease/oil on the dirty surface while the heads point outward into the water, forming a spherical <b>micelle</b> that traps the grease at its centre. These micelles are washed away with water, removing the dirt.</p>"},
+    {m:1, q:"Give one example of an antacid.", a:"<p><b>Ranitidine</b> (or magnesium hydroxide / sodium bicarbonate).</p>"}
+  ]
+}
+];
+
+/* ====================== RENDER ====================== */
+const wtRank={High:0,Medium:1,Core:2};
+const sidebar=document.getElementById('sidebar');
+const chaptersEl=document.getElementById('chapters');
+
+function renderSidebar(){
+  let html='<h3>Jump to chapter</h3>';
+  CHAPTERS.forEach(c=>{
+    html+=`<div class="navlink" data-id="${c.id}">
+      <span class="num">${c.num}</span>
+      <span>${c.name}</span>
+      <span class="wt ${c.wt}">${c.wt==='Core'?'Core':c.wt}</span>
+    </div>`;
+  });
+  html+='<h3>Sections</h3>';
+  html+=`<div class="navlink" data-jump="exampattern"><span class="num">📋</span><span>Exam pattern</span></div>`;
+  html+=`<div class="navlink" data-jump="exampattern"><span class="num">✍️</span><span>Answer-writing tips</span></div>`;
+  html+='<h3>Legend</h3>';
+  html+=`<div style="font-size:.78rem;color:var(--muted);padding:0 8px">
+    <span class="wt High">High</span> top weightage ·
+    <span class="wt Medium">Medium</span> solid ·
+    <span class="wt Core">Core</span> easy/short<br><br>
+    Tap a chapter number to mark it <b>done</b>.</div>`;
+  sidebar.innerHTML=html;
+
+  sidebar.querySelectorAll('.navlink').forEach(n=>{
+    n.addEventListener('click',e=>{
+      const id=n.getAttribute('data-id');
+      const jump=n.getAttribute('data-jump');
+      if(jump){document.getElementById(jump).scrollIntoView();return;}
+      if(e.target.classList.contains('num')){toggleDone(id);return;}
+      document.getElementById('ch-'+id).scrollIntoView();
+    });
+  });
+  refreshDone();
+}
+
+function renderChapters(){
+  let html='';
+  CHAPTERS.forEach(c=>{
+    html+=`<section class="chapter" id="ch-${c.id}">
+      <h2><span class="chnum">Ch ${c.num}</span> ${c.name} <span class="wt ${c.wt}">${c.wt}</span></h2>
+      <div class="why">💡 ${c.why}</div>`;
+
+    html+=`<div class="sub"><h4>Important topics (explained)</h4>`;
+    c.topics.forEach(t=>{
+      html+=`<details class="topic"><summary>${t.h}</summary><div class="body">${t.b}</div></details>`;
+    });
+    html+=`</div>`;
+
+    if(c.formulas&&c.formulas.length){
+      html+=`<div class="sub"><h4>Must-know formulas & reactions</h4>`;
+      c.formulas.forEach(f=>{html+=`<div class="fbox">${f}</div>`;});
+      html+=`</div>`;
+    }
+
+    html+=`<div class="sub"><h4>How questions come from this chapter</h4>`;
+    c.framing.forEach(f=>{html+=`<div class="frame"><b>▸</b> ${f}</div>`;});
+    html+=`</div>`;
+
+    html+=`<div class="sub"><h4>Practice questions with model answers</h4>`;
+    c.questions.forEach((q,i)=>{
+      html+=`<div class="qcard" data-q>
+        <div class="qhead"><span class="qm m${q.m}">${q.m} mark${q.m>1?'s':''}</span>
+        <span class="qt">${q.q}</span>
+        <span class="reveal">Show answer ▾</span></div>
+        <div class="ans"><div class="lbl">Model answer</div>${q.a}</div>
+      </div>`;
+    });
+    html+=`</div></section>`;
+  });
+  chaptersEl.innerHTML=html;
+
+  chaptersEl.querySelectorAll('.qcard .qhead').forEach(h=>{
+    h.addEventListener('click',()=>{
+      const card=h.closest('.qcard');
+      card.classList.toggle('open');
+      const r=card.querySelector('.reveal');
+      r.textContent=card.classList.contains('open')?'Hide answer ▴':'Show answer ▾';
+    });
+  });
+}
+
+/* ---- Done tracking (localStorage) ---- */
+function getDone(){try{return JSON.parse(localStorage.getItem('chem_done')||'[]');}catch{return [];}}
+function setDone(a){localStorage.setItem('chem_done',JSON.stringify(a));}
+function toggleDone(id){let d=getDone();d.includes(id)?d=d.filter(x=>x!==id):d.push(id);setDone(d);refreshDone();}
+function refreshDone(){
+  const d=getDone();
+  sidebar.querySelectorAll('.navlink[data-id]').forEach(n=>{
+    n.classList.toggle('done',d.includes(n.getAttribute('data-id')));
+  });
+}
+
+/* ---- Theme ---- */
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(t){document.body.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'☀︎':'☾';localStorage.setItem('chem_theme',t);}
+themeBtn.addEventListener('click',()=>applyTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark'));
+applyTheme(localStorage.getItem('chem_theme')||'dark');
+
+/* ---- Search ---- */
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+  const q=search.value.trim().toLowerCase();
+  document.querySelectorAll('section.chapter').forEach(sec=>{
+    let anyVisible=false;
+    sec.querySelectorAll('details.topic, .qcard').forEach(el=>{
+      const txt=el.textContent.toLowerCase();
+      const show=!q||txt.includes(q);
+      el.classList.toggle('hidden',!show);
+      if(show)anyVisible=true;
+    });
+    const titleMatch=sec.querySelector('h2').textContent.toLowerCase().includes(q);
+    sec.classList.toggle('hidden',!(!q||anyVisible||titleMatch));
+    if(titleMatch&&q){sec.querySelectorAll('details.topic,.qcard').forEach(el=>el.classList.remove('hidden'));sec.classList.remove('hidden');}
+  });
+});
+
+/* ---- Countdown timer ---- */
+const tleft=document.getElementById('tleft');
+const setexam=document.getElementById('setexam');
+function getExamTime(){const v=localStorage.getItem('chem_examtime');return v?parseInt(v):(Date.now()+8*3600*1000);}
+function setExamTime(t){localStorage.setItem('chem_examtime',t);}
+if(!localStorage.getItem('chem_examtime'))setExamTime(Date.now()+8*3600*1000);
+setexam.addEventListener('click',e=>{
+  e.stopPropagation();
+  const h=prompt('Hours until your exam? (e.g. 8 or 7.5)','8');
+  if(h&&!isNaN(parseFloat(h))){setExamTime(Date.now()+parseFloat(h)*3600*1000);}
+});
+function tick(){
+  const ms=getExamTime()-Date.now();
+  if(ms<=0){tleft.textContent='GO! 🎓';return;}
+  const s=Math.floor(ms/1000);
+  const hh=String(Math.floor(s/3600)).padStart(2,'0');
+  const mm=String(Math.floor((s%3600)/60)).padStart(2,'0');
+  const ss=String(s%60).padStart(2,'0');
+  tleft.textContent=`${hh}:${mm}:${ss}`;
+}
+setInterval(tick,1000);tick();
+
+/* ---- Quiz mode ---- */
+const quizbar=document.getElementById('quizbar');
+let quizPool=[],quizIdx=0;
+function buildPool(){
+  quizPool=[];
+  CHAPTERS.forEach(c=>c.questions.forEach(q=>quizPool.push({...q,ch:c.name})));
+  for(let i=quizPool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizPool[i],quizPool[j]]=[quizPool[j],quizPool[i]];}
+}
+function showQuiz(){
+  const q=quizPool[quizIdx];
+  document.getElementById('qprog').textContent=`Question ${quizIdx+1} of ${quizPool.length} · ${q.ch} · ${q.m} mark${q.m>1?'s':''}`;
+  document.getElementById('quizq').textContent=q.q;
+  const ae=document.getElementById('quizans');
+  ae.innerHTML='<div class="lbl" style="color:var(--good);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:800;margin-bottom:4px">Model answer</div>'+q.a;
+  ae.classList.remove('show');
+}
+document.getElementById('quizToggle').addEventListener('click',()=>{
+  if(quizbar.classList.contains('show')){quizbar.classList.remove('show');return;}
+  buildPool();quizIdx=0;showQuiz();quizbar.classList.add('show');
+});
+document.getElementById('qreveal').addEventListener('click',()=>document.getElementById('quizans').classList.add('show'));
+document.getElementById('qnext').addEventListener('click',()=>{quizIdx=(quizIdx+1)%quizPool.length;showQuiz();});
+document.getElementById('qclose').addEventListener('click',()=>quizbar.classList.remove('show'));
+
+/* ---- init ---- */
+renderSidebar();
+renderChapters();
+</script>
+</body>
+</html>
