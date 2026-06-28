@@ -28,6 +28,15 @@ standard Kerala/NCERT Class 12 Chemistry syllabus. **Verify the live mark scheme
 [dhsekerala.gov.in](https://www.dhsekerala.gov.in) on exam day** — boards can revise
 the pattern.
 
+## Quick Revision mode
+
+Short on time? The **⚡ Quick Revision** section (header button or sidebar link) is a
+one-screen-per-chapter cheat sheet for all 12 active chapters: must-know points, key
+reactions/formulas, and the 2-3 highest-probability "sure questions". It sits near the top
+of the app and the PDF so you can revise the whole syllabus fast, then drop into the full
+chapters only where you need detail. The predicted paper also tags questions that
+🔁 repeat almost every year (the SAY paper mirrors the regular March 2026 paper pattern).
+
 ## Deleted 2026 portions
 
 One detailed source lists **4 chapters as removed** from the Kerala Plus Two

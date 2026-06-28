@@ -104,6 +104,23 @@
     margin:9px 0;text-align:center}
   .dgm svg{color:var(--txt);max-width:100%;height:auto}
   .dgm .cap{font-size:.8rem;color:var(--muted);margin-top:6px;text-align:left}
+  .cheatwrap{background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--accent);
+    border-radius:16px;padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow)}
+  .cheatwrap>h2{margin:0 0 4px;font-size:1.25rem}
+  .cheatwrap>.sub2{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+  .cheatgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ccard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .ccard h3{margin:0 0 7px;font-size:1rem;display:flex;gap:8px;align-items:center}
+  .ccard h3 .cn{background:var(--accent);color:#04222f;border-radius:6px;padding:1px 7px;font-size:.74rem;font-weight:800}
+  .ccard h4{margin:9px 0 3px;font-size:.68rem;letter-spacing:.8px;text-transform:uppercase;color:var(--accent2)}
+  .ccard ul{margin:3px 0;padding-left:17px}
+  .ccard li{margin:3px 0;font-size:.86rem;line-height:1.45}
+  .ccard .kf{background:var(--panel2);border:1px dashed var(--line);border-radius:7px;padding:6px 9px;margin:3px 0;
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:.78rem;overflow-x:auto}
+  .ccard .sureq{font-size:.85rem;margin:4px 0;padding-left:17px;position:relative}
+  .ccard .sureq::before{content:"🔁";position:absolute;left:-2px;font-size:.7rem}
+  .ccard .sureq b{color:var(--accent)}
+  @media (max-width:880px){ .cheatgrid{grid-template-columns:1fr} }
   footer{max-width:1500px;margin:0 auto;padding:10px 22px 60px;color:var(--muted);font-size:.82rem}
   .tipbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:16px 0}
   .tipbox h2{margin-top:0;font-size:1.05rem}
@@ -157,6 +174,7 @@
   <div class="spacer"></div>
   <input class="search" id="search" placeholder="🔎 Search topics / questions…" />
   <div class="timer" id="timer">⏳ <b id="tleft">--:--:--</b> left <button class="btn" id="setexam" style="padding:3px 7px;font-size:.7rem;margin-left:6px">set</button></div>
+  <button class="btn acc" id="cheatBtn">⚡ Quick Revision</button>
   <button class="btn" id="quizToggle">🎯 Quiz me</button>
   <button class="btn" id="themeBtn">☀︎</button>
   <button class="btn" id="printBtn">🖨 Save as PDF</button>
@@ -206,6 +224,8 @@
         <div class="markmap">These eight chapters alone typically cover well over half the paper. Master them first.</div>
       </div>
     </div>
+
+    <div id="cheatsheet"></div>
 
     <div class="exbanner" id="exbanner">
       <h3>⚠️ Reportedly deleted from the 2026 syllabus — hidden</h3>
@@ -938,6 +958,168 @@ const META = [
   {match:"preparation of a primary amine", prob:80}
 ];
 
+/* ====================== QUICK-REVISION CHEAT SHEETS ====================== */
+/* Ultra-condensed, original high-yield notes for the 12 active chapters, ordered
+   by exam priority (organic + coordination + physical first). */
+const CHEAT = [
+  { n:12, name:"Aldehydes, Ketones & Carboxylic Acids",
+    must:[
+      "Carbonyl C is δ+ → nucleophilic addition. Reactivity aldehyde &gt; ketone (less +I, less steric).",
+      "<b>Tollens'</b> → aldehyde gives silver mirror, ketone does NOT.",
+      "<b>Fehling's</b> → aliphatic aldehyde gives red-brown Cu₂O; ketones & aromatic aldehydes do NOT.",
+      "<b>Iodoform (I₂/NaOH)</b> positive for CH₃CHO, methyl ketones (CH₃CO–), ethanol, CH₃CH(OH)– → yellow CHI₃.",
+      "<b>Aldol</b>: has α-H + dil. base → β-hydroxy carbonyl → α,β-unsaturated. <b>Cannizzaro</b>: NO α-H (HCHO, C₆H₅CHO) + conc. base → alcohol + acid salt.",
+      "Acid strength: EWG raises it → Cl₃CCOOH &gt; Cl₂CHCOOH &gt; ClCH₂COOH &gt; CH₃COOH."],
+    keys:["Clemmensen (Zn-Hg/HCl) & Wolff–Kishner (NH₂NH₂/KOH): C=O → CH₂"],
+    sure:["Distinguish ethanal vs propanone (Tollens'), propanal vs propanone (Fehling's)",
+      "Cannizzaro of benzaldehyde — why it, not acetaldehyde",
+      "Why aldehydes more reactive than ketones"] },
+
+  { n:11, name:"Alcohols, Phenols & Ethers",
+    must:[
+      "<b>Phenol &gt; alcohol acidity</b>: phenoxide is resonance-stabilised. –NO₂ at o/p raises acidity (picric acid strong).",
+      "Oxidation: 1° → aldehyde → acid; 2° → ketone; 3° resists.",
+      "<b>Lucas test</b>: 3° immediate turbidity, 2° ~5 min, 1° no reaction (cold).",
+      "Phenol + neutral FeCl₃ → violet colour (test for phenol)."],
+    keys:["Williamson: alkoxide + 1° alkyl halide → ether (SN2; 1° avoids elimination)",
+      "Kolbe: Na-phenoxide + CO₂ → salicylic acid",
+      "Reimer–Tiemann: phenol + CHCl₃ + KOH → salicylaldehyde (–CHO ortho)"],
+    sure:["Why phenol more acidic than ethanol + nitro effect",
+      "Reimer–Tiemann / Kolbe reaction",
+      "Williamson synthesis — why a primary halide"] },
+
+  { n:13, name:"Amines",
+    must:[
+      "<b>Basicity (aqueous, simple alkyl): 2° &gt; 1° &gt; 3°</b>. Aniline weakest (lone pair into ring).",
+      "<b>Carbylamine test</b> (R-NH₂ + CHCl₃ + alc.KOH → foul isocyanide): only 1° amines.",
+      "Hinsberg's reagent distinguishes 1°/2°/3°."],
+    keys:["Gabriel → pure 1° amine (no aromatic amines)",
+      "Hoffmann bromamide (R-CONH₂ + Br₂/NaOH) → 1° amine, one C fewer",
+      "Diazotisation: Ar-NH₂ + NaNO₂ + HCl (0–5°C) → Ar-N₂⁺; then Sandmeyer / coupling (azo dyes)"],
+    sure:["Order of basicity: aniline, ammonia, methylamine + reason",
+      "Synthetic uses of diazonium salts",
+      "Distinguish 1°/2°/3° amine"] },
+
+  { n:10, name:"Haloalkanes & Haloarenes",
+    must:[
+      "<b>SN2</b>: 1 step, rate=k[RX][Nu], inversion (Walden), favoured by 1°.",
+      "<b>SN1</b>: 2 steps (carbocation), rate=k[RX], racemisation, favoured by 3°.",
+      "Haloarenes less reactive: C–X partial double bond (resonance), sp² C, ring repels nucleophile.",
+      "Saytzeff: more-substituted (stable) alkene is the major elimination product."],
+    keys:["R-OH → R-Cl best with SOCl₂ (by-products SO₂, HCl are gases)"],
+    sure:["Compare SN1 and SN2",
+      "Why chlorobenzene less reactive than chloromethane",
+      "Saytzeff rule"] },
+
+  { n:9, name:"Coordination Compounds",
+    must:[
+      "Chelate = ring from polydentate ligand (extra stable). Ambidentate = binds 2 ways (NO₂⁻, SCN⁻).",
+      "IUPAC: ligands alphabetical, anionic end -o (chlorido, cyanido), complex anion ends -ate, ox. state in Roman.",
+      "<b>CFT octahedral</b>: t₂g (low) + e_g (high), gap Δ₀. Tetrahedral reversed, always high-spin.",
+      "Spectrochemical (weak→strong): I⁻&lt;F⁻&lt;H₂O&lt;NH₃&lt;en&lt;CN⁻≈CO. Strong field → low-spin.",
+      "Colour = d–d transition; magnetism from unpaired e⁻, μ=√(n(n+2)) BM."],
+    keys:["[Co(NH₃)₆]³⁺ low-spin diamagnetic ; [CoF₆]³⁻ high-spin paramagnetic"],
+    sure:["CFT: why [Co(NH₃)₆]³⁺ diamagnetic, [CoF₆]³⁻ paramagnetic",
+      "IUPAC names of given complexes",
+      "Define chelate / ambidentate ligand"] },
+
+  { n:8, name:"d- and f-Block Elements",
+    must:[
+      "Transition metals: variable oxidation states, coloured ions, paramagnetism, catalysts, complexes/alloys.",
+      "μ = √(n(n+2)) BM (n = unpaired e⁻). e.g. Fe²⁺ (d⁶, n=4) → 4.9 BM.",
+      "<b>KMnO₄</b>: Mn⁷⁺ → Mn²⁺ (5 e⁻) in acid; strong oxidiser. <b>K₂Cr₂O₇</b>: Cr⁶⁺ → Cr³⁺ (6 e⁻); orange↔yellow with base.",
+      "<b>Lanthanoid contraction</b>: 4f poor shielding → radii ↓ → Zr ≈ Hf (hard to separate)."],
+    keys:["MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O","Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O"],
+    sure:["Lanthanoid contraction + consequences",
+      "Spin-only magnetic moment of a given ion",
+      "Why transition metals show variable oxidation states / colour"] },
+
+  { n:3, name:"Electrochemistry",
+    must:[
+      "E°cell = E°cathode − E°anode. +ve E° → spontaneous (ΔG = −nFE).",
+      "<b>Nernst (298K)</b>: E = E° − (0.0591/n)·logQ.",
+      "On dilution: conductivity κ ↓ but molar conductivity Λm ↑.",
+      "Kohlrausch's law → Λ°m of weak electrolyte and degree of dissociation. 1 F = 96500 C."],
+    keys:["logKc = nE°/0.0591","Λm = κ×1000/c","w = MIt/(nF)"],
+    sure:["EMF of a cell by Nernst equation (numerical)",
+      "Kohlrausch's law + application",
+      "Why Λm increases but κ decreases on dilution"] },
+
+  { n:4, name:"Chemical Kinetics",
+    must:[
+      "Order = sum of powers in experimental rate law (0/fraction possible). Molecularity = whole number, elementary step.",
+      "<b>First order</b>: k=(2.303/t)log([R]₀/[R]); t½=0.693/k (independent of conc.).",
+      "Zero order: k=([R]₀−[R])/t. Pseudo first order: ester hydrolysis (water excess).",
+      "Arrhenius: k=Ae^(−Ea/RT); rate ↑ with T; catalyst lowers Ea."],
+    keys:["log(k₂/k₁) = (Ea/2.303R)(1/T₁ − 1/T₂)"],
+    sure:["First-order numerical (find t, k or amount left)",
+      "Order vs molecularity",
+      "Pseudo first-order reaction + example"] },
+
+  { n:2, name:"Solutions",
+    must:[
+      "Molarity (temp-dependent) vs molality (temp-independent, used for colligative).",
+      "Henry: p = K_H·x. Raoult: p_A = p°_A·x_A.",
+      "+ve deviation (ethanol+acetone, min-boiling azeotrope); −ve deviation (chloroform+acetone, max-boiling).",
+      "4 colligative properties; van't Hoff i &gt;1 (dissociation), &lt;1 (association)."],
+    keys:["ΔTb=iKb·m ; ΔTf=iKf·m ; π=iCRT","M = (iKf·w_B·1000)/(ΔTf·w_A)"],
+    sure:["Molar mass from ΔTf / ΔTb / osmotic pressure (numerical)",
+      "Henry's / Raoult's law + application",
+      "+ve vs −ve deviation with example"] },
+
+  { n:14, name:"Biomolecules",
+    must:[
+      "Carbohydrates: mono (glucose, fructose), di (sucrose non-reducing; maltose/lactose reducing), poly (starch, cellulose, glycogen).",
+      "Proteins: α-amino acids + peptide (–CO–NH–) bonds; zwitterion; denaturation loses 2°/3° structure (boiled egg).",
+      "DNA: deoxyribose, A-T-G-C, double helix. RNA: ribose, A-U-G-C, single strand.",
+      "Deficiency: scurvy (C), rickets (D), night blindness (A)."],
+    keys:[],
+    sure:["Differences between DNA and RNA",
+      "Denaturation / peptide bond / zwitterion",
+      "Why sucrose is non-reducing"] },
+
+  { n:15, name:"Polymers",
+    must:[
+      "<b>Addition</b> (chain, no small molecule lost): polythene, PVC, Teflon, polystyrene.",
+      "<b>Condensation</b> (step, lose H₂O): nylon-6,6, terylene, bakelite.",
+      "Monomers: nylon-6,6 = hexamethylenediamine + adipic acid; terylene = ethylene glycol + terephthalic acid; bakelite = phenol + HCHO; Buna-S = butadiene + styrene.",
+      "Vulcanisation = rubber + sulphur (cross-links → stronger, more elastic)."],
+    keys:[],
+    sure:["Addition vs condensation polymer + examples",
+      "Monomers of nylon-6,6 / terylene / bakelite",
+      "Vulcanisation / a biodegradable polymer"] },
+
+  { n:16, name:"Chemistry in Everyday Life",
+    must:[
+      "Drug classes: antacids (ranitidine), antihistamines, tranquilizers, analgesics (aspirin), antibiotics (penicillin).",
+      "<b>Antiseptic</b> = living tissue (Dettol) vs <b>disinfectant</b> = non-living surface (conc. phenol). Phenol is both, by concentration.",
+      "Soaps fail in hard water (Ca²⁺/Mg²⁺ scum); detergents work (soluble Ca/Mg salts).",
+      "Cleansing = micelle (tail into grease, ionic head into water)."],
+    keys:[],
+    sure:["Antiseptics vs disinfectants + examples",
+      "Soaps vs detergents / why soaps fail in hard water",
+      "Cleansing action of soap (micelle)"] }
+];
+
+function renderCheat(){
+  let html=`<div class="cheatwrap" id="cheatwrap-inner">
+    <h2>⚡ Quick Revision — study this if you're short on time</h2>
+    <div class="sub2">The 12 in-syllabus chapters, condensed. Read the <b>must-know</b> points, memorise the <b>key reactions</b>, and make sure you can answer the <b>🔁 sure questions</b>. This alone gets you well past the pass mark. Full explanations are in the chapters below.</div>
+    <div class="cheatgrid">`;
+  CHEAT.forEach(c=>{
+    html+=`<div class="ccard">
+      <h3><span class="cn">Ch ${c.n}</span> ${c.name}</h3>
+      <h4>Must know</h4><ul>${c.must.map(m=>`<li>${m}</li>`).join('')}</ul>`;
+    if(c.keys&&c.keys.length){
+      html+=`<h4>Key reactions / formulas</h4>${c.keys.map(k=>`<div class="kf">${k}</div>`).join('')}`;
+    }
+    html+=`<h4>Sure questions</h4>${c.sure.map(s=>`<div class="sureq">${s}</div>`).join('')}`;
+    html+=`</div>`;
+  });
+  html+=`</div></div>`;
+  document.getElementById('cheatsheet').innerHTML=html;
+}
+
 /* ====================== RENDER ====================== */
 const wtRank={High:0,Medium:1,Core:2};
 const sidebar=document.getElementById('sidebar');
@@ -954,6 +1136,7 @@ function renderSidebar(){
     </div>`;
   });
   html+='<h3>Sections</h3>';
+  html+=`<div class="navlink" data-jump="cheatsheet"><span class="num">⚡</span><span>Quick Revision (cheat sheet)</span></div>`;
   html+=`<div class="navlink" data-jump="ch-predicted"><span class="num">🔮</span><span>Predicted exam paper</span></div>`;
   html+=`<div class="navlink" data-jump="exampattern"><span class="num">📋</span><span>Exam pattern</span></div>`;
   html+=`<div class="navlink" data-jump="exampattern"><span class="num">✍️</span><span>Answer-writing tips</span></div>`;
@@ -1032,7 +1215,7 @@ function renderMock(){
     <div class="why">💡 A full mock in the real Kerala 60-mark format, built from recurring past-paper patterns.
     The <b>% on each question is my honest estimate</b> of how likely that type appears — <b>not a leak</b>, just a guess from past papers.
     Questions are sorted <b>most-likely first</b>, so start at the top of each section. A <span class="prob">👉 start here</span> tag marks the single best one to do first.
-    Some questions show a <b>✏️ diagram to draw</b> (drawing it in the exam earns marks). Answers are written the way you'd write them by hand. If you can do this paper, you pass.</div>`;
+    Some questions show a <b>✏️ diagram to draw</b> (drawing it in the exam earns marks). Answers are written the way you'd write them by hand. The SAY paper usually mirrors the regular March 2026 paper's pattern, so a <span class="prob" style="background:rgba(76,194,255,.16);color:var(--accent)">🔁 repeats yearly</span> tag marks the types that come back almost every year. If you can do this paper, you pass.</div>`;
   MOCK.sections.forEach(sec=>{
     html+=`<div class="sub"><h4>${sec.title}</h4>`;
     const rows=sec.items.map(it=>({it,meta:META.find(m=>it.q.includes(m.match))||{}}))
@@ -1042,12 +1225,13 @@ function renderMock(){
       const {it,meta}=row;
       const prob=meta.prob||50;
       const probBadge=`<span class="prob ${prob<70?'lowp':''}">≈${prob}%</span>`;
+      const repeatBadge=prob>=80?`<span class="prob" style="background:rgba(76,194,255,.16);color:var(--accent)">🔁 repeats yearly</span>`:'';
       const startBadge=idx===0?`<span class="starthere">👉 start here</span>`:'';
       const drawCue=meta.draw?`<div class="drawcue">✏️ <b>Draw this:</b> ${meta.draw}</div>`:'';
       const dgm=meta.dgm?`<div class="dgm">${meta.dgm}</div>`:'';
       html+=`<div class="qcard" data-q>
         <div class="qhead"><span class="qm m${sec.marks}">Q${n} · ${sec.marks}m</span>
-        ${probBadge}${startBadge}
+        ${probBadge}${repeatBadge}${startBadge}
         <span class="qt">${it.q}</span>
         <span class="reveal">Show answer ▾</span></div>
         <div class="ans"><div class="lbl">Model answer (exam style)</div>${drawCue}${dgm}<p>${it.a}</p></div>
@@ -1170,8 +1354,11 @@ function applyEx(hide){
 }
 exToggle.addEventListener('click',()=>applyEx(!document.body.classList.contains('hideex')));
 
+document.getElementById('cheatBtn').addEventListener('click',()=>document.getElementById('cheatsheet').scrollIntoView());
+
 /* ---- init ---- */
 renderSidebar();
+renderCheat();
 renderChapters();
 renderMock();
 applyEx(localStorage.getItem('chem_hideex')!=='0'); // default: hidden
