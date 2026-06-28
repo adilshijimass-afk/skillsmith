@@ -114,11 +114,18 @@
     .grid2{grid-template-columns:1fr}
   }
   @media print{
-    header.top,aside,.quizbar,.btn,.reveal{display:none!important}
-    .layout{grid-template-columns:1fr}
+    header.top,aside,.quizbar,.btn,.reveal,#setexam{display:none!important}
+    .layout{grid-template-columns:1fr;max-width:none}
+    main{padding:0}
     .ans{display:block!important}
-    details.topic{open:true}
-    body{background:#fff;color:#000}
+    .qcard.open .ans, .ans{display:block!important}
+    details.topic>summary::before{content:""}
+    details.topic .body{padding-left:14px}
+    section.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:auto;margin-bottom:10px}
+    section.chapter h2{page-break-after:avoid}
+    details.topic,.qcard,.fbox,.frame{page-break-inside:avoid}
+    .card,.hero,.tipbox{box-shadow:none}
+    .grid2{break-inside:avoid}
   }
 </style>
 </head>
@@ -132,7 +139,7 @@
   <div class="timer" id="timer">⏳ <b id="tleft">--:--:--</b> left <button class="btn" id="setexam" style="padding:3px 7px;font-size:.7rem;margin-left:6px">set</button></div>
   <button class="btn" id="quizToggle">🎯 Quiz me</button>
   <button class="btn" id="themeBtn">☀︎</button>
-  <button class="btn" onclick="window.print()">🖨 Print</button>
+  <button class="btn" id="printBtn">🖨 Save as PDF</button>
 </header>
 
 <div class="layout">
@@ -920,9 +927,25 @@ document.getElementById('qreveal').addEventListener('click',()=>document.getElem
 document.getElementById('qnext').addEventListener('click',()=>{quizIdx=(quizIdx+1)%quizPool.length;showQuiz();});
 document.getElementById('qclose').addEventListener('click',()=>quizbar.classList.remove('show'));
 
+/* ---- Expand all / print ---- */
+function expandAll(){
+  document.querySelectorAll('details.topic').forEach(d=>d.open=true);
+  document.querySelectorAll('.qcard').forEach(c=>{
+    c.classList.add('open');
+    const r=c.querySelector('.reveal'); if(r)r.textContent='Hide answer ▴';
+  });
+}
+document.getElementById('printBtn').addEventListener('click',()=>{expandAll();setTimeout(()=>window.print(),60);});
+
 /* ---- init ---- */
 renderSidebar();
 renderChapters();
+
+/* Print/PDF mode: ?print=1 expands everything and uses light theme (used for PDF export) */
+if(/[?&#]print/.test(location.search+location.hash)){
+  applyTheme('light');
+  expandAll();
+}
 </script>
 </body>
 </html>
