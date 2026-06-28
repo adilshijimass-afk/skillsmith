@@ -213,6 +213,8 @@
 
     <div id="chapters"></div>
 
+    <div id="mockpaper"></div>
+
     <div class="tipbox" id="exampattern">
       <h2>📋 Exam pattern — how the 60 marks are split</h2>
       <ul>
@@ -787,6 +789,53 @@ const CHAPTERS = [
 }
 ];
 
+/* ====================== PREDICTED EXAM PAPER ====================== */
+/* High-probability questions in the exact Kerala 60-mark format, built from
+   recurring past-paper patterns. Excludes the 4 reportedly-deleted chapters. */
+const MOCK = {
+  sections:[
+    { title:"Section A — 1 mark each (Q1–5, answer any 4)", marks:1, items:[
+      {q:"Define molarity of a solution.", a:"Molarity (M) = number of moles of solute dissolved per litre of solution. It is temperature-dependent."},
+      {q:"What is the value of one Faraday of charge?", a:"96500 C — the charge carried by one mole of electrons."},
+      {q:"The half-life of a first-order reaction is independent of what?", a:"The initial concentration of the reactant."},
+      {q:"Which is the stronger field ligand: H₂O or CN⁻?", a:"CN⁻ (much higher in the spectrochemical series)."},
+      {q:"Name the reagent used in the silver-mirror test for aldehydes.", a:"Tollens' reagent (ammoniacal silver nitrate)."}
+    ]},
+    { title:"Section B — 2 marks each (Q6–15, answer any 8)", marks:2, items:[
+      {q:"State Henry's law and give one application.", a:"The solubility of a gas in a liquid is directly proportional to its partial pressure: p = K_H·x. Application: aerated/soft drinks are bottled under high CO₂ pressure to increase dissolved gas."},
+      {q:"State Kohlrausch's law and give one use.", a:"At infinite dilution, the limiting molar conductivity equals the sum of the individual ionic contributions. Use: finding Λ°_m of a weak electrolyte (e.g. acetic acid) and its degree of dissociation."},
+      {q:"Distinguish between order and molecularity of a reaction.", a:"Order = sum of powers of concentration terms in the experimental rate law; can be zero/fractional/integral, defined for the overall reaction. Molecularity = number of species in an elementary step; always a whole number, defined only for elementary reactions."},
+      {q:"Define a chelate and an ambidentate ligand with one example each.", a:"Chelate: ring formed when a polydentate ligand binds a metal through two or more donor atoms (e.g. ethylenediamine). Ambidentate ligand: a ligand that can bind through either of two donor atoms (e.g. NO₂⁻ via N or O; SCN⁻ via S or N)."},
+      {q:"Why are aldehydes more reactive than ketones towards nucleophilic addition?", a:"A ketone has two electron-donating alkyl groups that lower the positive charge on the carbonyl carbon and sterically hinder attack; an aldehyde has only one, so its carbonyl carbon is more electrophilic and less crowded — hence more reactive."},
+      {q:"Why is phenol more acidic than ethanol?", a:"The phenoxide ion formed after losing H⁺ is resonance-stabilised (charge delocalised into the ring), whereas the ethoxide ion has the charge localised on oxygen and destabilised by the +I ethyl group. Greater anion stability ⟹ stronger acid."},
+      {q:"Arrange in increasing order of basic strength in water: aniline, ammonia, methylamine.", a:"aniline < ammonia < methylamine. Aniline's lone pair is delocalised into the ring (least available); methylamine's +I methyl group raises electron density on N (most basic)."},
+      {q:"What is lanthanoid contraction and one consequence?", a:"The steady decrease in atomic/ionic radii across the 4f series due to poor shielding by 4f electrons. Consequence: the second and third transition series of a group have almost identical sizes (e.g. Zr and Hf), so they are hard to separate."},
+      {q:"Give two differences between DNA and RNA.", a:"DNA has deoxyribose sugar and the base thymine; RNA has ribose and uracil. DNA is usually double-stranded and stores genetic information; RNA is usually single-stranded and helps in protein synthesis."},
+      {q:"Distinguish between addition and condensation polymerisation with one example each.", a:"Addition: unsaturated monomers add repeatedly with no loss of small molecules (e.g. polythene from ethene). Condensation: bi-functional monomers combine with elimination of a small molecule like water (e.g. nylon-6,6)."}
+    ]},
+    { title:"Section C — 3 marks each (Q16–26, answer any 8)", marks:3, items:[
+      {q:"Calculate the EMF of Zn|Zn²⁺(0.1 M)||Cu²⁺(1.0 M)|Cu at 298 K. E°(Zn²⁺/Zn)=−0.76 V, E°(Cu²⁺/Cu)=+0.34 V.", a:"E°_cell = 0.34 − (−0.76) = 1.10 V. n=2, Q = [Zn²⁺]/[Cu²⁺] = 0.1. E = 1.10 − (0.0591/2)·log(0.1) = 1.10 + 0.0296 = 1.13 V."},
+      {q:"A first-order reaction has k = 1.15×10⁻³ s⁻¹. Time for 5 g reactant to fall to 3 g?", a:"t = (2.303/k)·log([R]₀/[R]) = (2.303/1.15×10⁻³)·log(5/3) = 2002.6 × 0.2219 ≈ 444 s."},
+      {q:"1.0 g of a non-electrolyte in 50 g benzene lowers freezing point by 0.40 K (K_f = 5.12). Find its molar mass.", a:"M = (K_f·w_B·1000)/(ΔT_f·w_A) = (5.12×1.0×1000)/(0.40×50) = 256 g/mol."},
+      {q:"Using CFT, explain why [Co(NH₃)₆]³⁺ is diamagnetic but [CoF₆]³⁻ is paramagnetic.", a:"Both are Co³⁺ (d⁶), octahedral. NH₃ is strong-field → large Δ₀ → electrons pair as t₂g⁶ e_g⁰, no unpaired electrons → diamagnetic (low-spin). F⁻ is weak-field → small Δ₀ → t₂g⁴ e_g², 4 unpaired electrons → paramagnetic (high-spin)."},
+      {q:"Write IUPAC names: (a) K₄[Fe(CN)₆] (b) [Cr(NH₃)₆]Cl₃ (c) [Co(en)₃]Cl₃.", a:"(a) Potassium hexacyanidoferrate(II). (b) Hexaamminechromium(III) chloride. (c) Tris(ethane-1,2-diamine)cobalt(III) chloride."},
+      {q:"Compare SN1 and SN2 mechanisms (molecularity, rate law, stereochemistry, substrate).", a:"SN1: two steps via carbocation, unimolecular, rate = k[RX], racemisation, favoured by 3° halides. SN2: one step, bimolecular, rate = k[RX][Nu], inversion (Walden), favoured by 1° halides."},
+      {q:"How would you distinguish (a) ethanal & propanone and (b) propanal & propanone by chemical tests?", a:"(a) Both give iodoform; use Tollens' — ethanal gives a silver mirror, propanone does not. (b) Use Fehling's/Tollens' — propanal (aldehyde) gives red-brown Cu₂O / silver mirror; propanone gives no reaction."},
+      {q:"Explain why phenol is more acidic than ethanol and how a nitro group affects phenol's acidity.", a:"Phenoxide is resonance-stabilised (charge into ring) so phenol is more acidic than ethanol. Electron-withdrawing –NO₂ at ortho/para further delocalises the negative charge, increasing acidity (picric acid is strongly acidic)."},
+      {q:"Give the synthetic importance of diazonium salts with two example reactions.", a:"They let –N₂⁺ be replaced by groups hard to add directly. Sandmeyer: Ar–N₂⁺ + CuCl → Ar–Cl + N₂. Coupling: Ar–N₂⁺ + phenol → p-hydroxyazobenzene (azo dye)."},
+      {q:"Calculate the spin-only magnetic moment of Fe²⁺ and explain why transition metals show variable oxidation states.", a:"Fe²⁺ = 3d⁶, n = 4 unpaired; μ = √(4×6) = 4.90 BM. Variable oxidation states arise because (n−1)d and ns energies are close, so different numbers of electrons can take part in bonding."},
+      {q:"Explain the cleansing action of soap, and distinguish antiseptics from disinfectants.", a:"Soap's hydrophobic tail dissolves in grease while the hydrophilic head faces water, forming a micelle that traps dirt and is washed away. Antiseptics are applied to living tissue (Dettol); disinfectants to non-living surfaces (conc. phenol)."}
+    ]},
+    { title:"Section D — 4 marks each (Q27–31, answer any 4)", marks:4, items:[
+      {q:"What is the Cannizzaro reaction? Write it for benzaldehyde and explain why benzaldehyde undergoes it but acetaldehyde does not.", a:"Cannizzaro = base-induced disproportionation of an aldehyde with no α-hydrogen: one molecule is oxidised to the carboxylate, another reduced to the alcohol. 2C₆H₅CHO + conc. NaOH → C₆H₅COONa + C₆H₅CH₂OH. Benzaldehyde has no α-H so it disproportionates; acetaldehyde has α-H and prefers aldol condensation instead."},
+      {q:"For the cell Mg|Mg²⁺(0.1 M)||Cu²⁺(0.01 M)|Cu, write the cell reaction, find E°_cell, E_cell and ΔG°. [E°(Mg²⁺/Mg)=−2.37 V, E°(Cu²⁺/Cu)=+0.34 V]", a:"Reaction: Mg + Cu²⁺ → Mg²⁺ + Cu. E°_cell = 0.34 −(−2.37) = 2.71 V. n=2, Q = [Mg²⁺]/[Cu²⁺] = 0.1/0.01 = 10. E = 2.71 − (0.0591/2)·log10 = 2.71 − 0.0296 = 2.68 V. ΔG° = −nFE° = −2×96500×2.71 = −523 kJ (≈ −5.23×10⁵ J)."},
+      {q:"Using crystal field theory, explain the colour and magnetic behaviour of coordination compounds. Define the spectrochemical series with one strong and one weak ligand.", a:"Ligands split d-orbitals (octahedral: t₂g below, e_g above, gap Δ₀). An electron absorbs visible light to jump t₂g→e_g; the complementary colour is seen (colour). Number of unpaired electrons after filling decides magnetism (paramagnetic if unpaired). The spectrochemical series ranks ligands by field strength — weak: I⁻, F⁻, H₂O; strong: NH₃, en, CN⁻, CO. Strong-field → low-spin; weak-field → high-spin."},
+      {q:"Complete and name the reactions: (a) sodium phenoxide + CO₂ (b) phenol + CHCl₃ + KOH (c) alkoxide + primary alkyl halide (d) salicylic acid use.", a:"(a) Kolbe's reaction → sodium salicylate → salicylic acid. (b) Reimer–Tiemann → salicylaldehyde (–CHO at ortho). (c) Williamson ether synthesis → ether (SN2; primary halide avoids elimination). (d) Salicylic acid is the basis of aspirin (acetylsalicylic acid)."},
+      {q:"Describe the preparation of a primary amine by (a) Gabriel synthesis and (b) Hoffmann bromamide degradation, and describe the carbylamine test for primary amines.", a:"(a) Gabriel: phthalimide → (KOH, R–X) → N-alkylphthalimide → hydrolysis → pure 1° amine (no aromatic amines, as aryl halides don't do SN2). (b) Hoffmann: R–CONH₂ + Br₂ + 4NaOH → R–NH₂ (one carbon fewer). Carbylamine test: 1° amine + CHCl₃ + alc.KOH → foul-smelling isocyanide (R–NC) — confirms a primary amine."}
+    ]}
+  ]
+};
+
 /* ====================== RENDER ====================== */
 const wtRank={High:0,Medium:1,Core:2};
 const sidebar=document.getElementById('sidebar');
@@ -803,6 +852,7 @@ function renderSidebar(){
     </div>`;
   });
   html+='<h3>Sections</h3>';
+  html+=`<div class="navlink" data-jump="ch-predicted"><span class="num">🔮</span><span>Predicted exam paper</span></div>`;
   html+=`<div class="navlink" data-jump="exampattern"><span class="num">📋</span><span>Exam pattern</span></div>`;
   html+=`<div class="navlink" data-jump="exampattern"><span class="num">✍️</span><span>Answer-writing tips</span></div>`;
   html+='<h3>Legend</h3>';
@@ -864,6 +914,36 @@ function renderChapters(){
   chaptersEl.innerHTML=html;
 
   chaptersEl.querySelectorAll('.qcard .qhead').forEach(h=>{
+    h.addEventListener('click',()=>{
+      const card=h.closest('.qcard');
+      card.classList.toggle('open');
+      const r=card.querySelector('.reveal');
+      r.textContent=card.classList.contains('open')?'Hide answer ▴':'Show answer ▾';
+    });
+  });
+}
+
+function renderMock(){
+  let n=0;
+  let html=`<section class="chapter" id="ch-predicted">
+    <h2><span class="chnum" style="background:var(--accent2)">🔮</span> Predicted exam paper (high-probability) <span class="wt High">Do this</span></h2>
+    <div class="why">💡 A full mock in the real Kerala 60-mark format, built from recurring past-paper patterns. Not a leak — a high-probability prediction. Try to answer before tapping "Show answer". If you can do this paper, you pass.</div>`;
+  MOCK.sections.forEach(sec=>{
+    html+=`<div class="sub"><h4>${sec.title}</h4>`;
+    sec.items.forEach(it=>{
+      n++;
+      html+=`<div class="qcard" data-q>
+        <div class="qhead"><span class="qm m${sec.marks}">Q${n} · ${sec.marks}m</span>
+        <span class="qt">${it.q}</span>
+        <span class="reveal">Show answer ▾</span></div>
+        <div class="ans"><div class="lbl">Model answer</div><p>${it.a}</p></div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  html+=`</section>`;
+  document.getElementById('mockpaper').innerHTML=html;
+  document.querySelectorAll('#mockpaper .qcard .qhead').forEach(h=>{
     h.addEventListener('click',()=>{
       const card=h.closest('.qcard');
       card.classList.toggle('open');
@@ -979,6 +1059,7 @@ exToggle.addEventListener('click',()=>applyEx(!document.body.classList.contains(
 /* ---- init ---- */
 renderSidebar();
 renderChapters();
+renderMock();
 applyEx(localStorage.getItem('chem_hideex')!=='0'); // default: hidden
 
 /* Print/PDF mode: ?print=1 expands everything, light theme, excluded chapters stay hidden */
