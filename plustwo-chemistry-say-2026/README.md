@@ -28,6 +28,18 @@ standard Kerala/NCERT Class 12 Chemistry syllabus. **Verify the live mark scheme
 [dhsekerala.gov.in](https://www.dhsekerala.gov.in) on exam day** — boards can revise
 the pattern.
 
+## Deleted 2026 portions
+
+One detailed source lists **4 chapters as removed** from the Kerala Plus Two
+Chemistry 2025-26 syllabus (matching the NCERT 2023 rationalisation): **The Solid
+State, Surface Chemistry, General Principles & Processes of Isolation of Elements
+(Metallurgy), and The p-Block Elements**. Other sources say "no change," so this is
+contested. The app **hides these 4 by default** (out of the chapter list, quiz and
+PDF) with a one-tap "Show the 4 chapters" button and a banner telling you to confirm
+on [dhsekerala.gov.in](https://www.dhsekerala.gov.in). Nothing is deleted permanently
+— if your school confirms they're still tested, one tap restores them. Pass
+`?print=1&showall` when exporting the PDF to include them.
+
 ## Honest note
 
 No app can predict the exact paper. These are high-probability practice questions

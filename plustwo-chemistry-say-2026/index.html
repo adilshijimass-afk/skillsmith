@@ -99,6 +99,15 @@
   .tipbox li{margin:5px 0}
   mark{background:var(--med);color:#2a1d00;padding:0 2px;border-radius:3px}
   .hidden{display:none !important}
+  body.hideex .exch{display:none !important}
+  .exbadge{font-size:.6rem;font-weight:800;padding:2px 7px;border-radius:20px;text-transform:uppercase;
+    background:rgba(240,162,59,.18);color:var(--warn);border:1px solid var(--warn)}
+  .exbanner{background:linear-gradient(135deg,rgba(240,162,59,.12),rgba(255,107,107,.08));
+    border:1px solid var(--warn);border-radius:14px;padding:14px 18px;margin-bottom:16px}
+  .exbanner h3{margin:0 0 6px;font-size:1rem;color:var(--warn)}
+  .exbanner p{margin:6px 0;font-size:.9rem;color:var(--txt)}
+  .exbanner .exlist{font-weight:700}
+  .exbanner .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
   .quizbar{position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--line);
     padding:12px 18px;z-index:60;box-shadow:0 -4px 22px rgba(0,0,0,.3);display:none}
   .quizbar.show{display:block}
@@ -151,7 +160,7 @@
       important topics explained in plain language, how each topic gets asked, and practice questions with full model answers
       written the way the examiner wants them. Built around the real <b>60-mark theory pattern</b>.</p>
       <div class="pillrow">
-        <span class="pill">📘 16 chapters</span>
+        <span class="pill">📘 12 active chapters <span style="opacity:.7">(+4 reportedly excluded)</span></span>
         <span class="pill">⏱ 2 hrs + 15 min cool-off</span>
         <span class="pill">✍️ 1 / 2 / 3 / 4-mark questions</span>
         <span class="pill">✅ Pass mark: 18 / 60 (30%)</span>
@@ -165,9 +174,9 @@
         <ol>
           <li><span class="t">0:00–0:20</span> Read the exam-pattern + answer-writing tips at the bottom first. Know how marks are won.</li>
           <li><span class="t">0:20–3:30</span> <b>Organic chemistry block</b> (Ch 10–13) — highest weightage, most predictable. Learn name-reactions + distinguishing tests cold.</li>
-          <li><span class="t">3:30–5:00</span> <b>Physical block</b> — Electrochemistry, Chemical Kinetics, Solutions, Solid State. Practise the numericals; the formulas repeat.</li>
-          <li><span class="t">5:00–6:30</span> <b>Inorganic block</b> — Coordination Compounds (CFT!), d & f-block (KMnO₄/K₂Cr₂O₇), p-block, Metallurgy.</li>
-          <li><span class="t">6:30–7:30</span> Biomolecules, Polymers, Surface Chemistry, Chemistry in Everyday Life — short, scoring, easy to memorise.</li>
+          <li><span class="t">3:30–5:00</span> <b>Physical block</b> — Electrochemistry, Chemical Kinetics, Solutions. Practise the numericals; the formulas repeat.</li>
+          <li><span class="t">5:00–6:30</span> <b>Inorganic block</b> — Coordination Compounds (CFT!), d & f-block (KMnO₄/K₂Cr₂O₇).</li>
+          <li><span class="t">6:30–7:30</span> Biomolecules, Polymers, Chemistry in Everyday Life — short, scoring, easy to memorise.</li>
           <li><span class="t">7:30–8:00</span> Run <b>Quiz me</b>, re-read every "How it's asked" box, sleep if you can.</li>
         </ol>
       </div>
@@ -184,6 +193,21 @@
           <li><span class="t">Solutions</span> — colligative properties + van't Hoff factor.</li>
         </ol>
         <div class="markmap">These eight chapters alone typically cover well over half the paper. Master them first.</div>
+      </div>
+    </div>
+
+    <div class="exbanner" id="exbanner">
+      <h3>⚠️ Reportedly deleted from the 2026 syllabus — hidden</h3>
+      <p>One detailed source lists these <span class="exlist">4 chapters as removed</span> from the Kerala Plus Two
+      Chemistry 2025‑26 syllabus (they match the NCERT 2023 rationalisation):
+      <b>The Solid State · Surface Chemistry · Isolation of Elements (Metallurgy) · The p‑Block Elements</b>.
+      They are <b>hidden</b> so you don't waste time, and left out of the quiz and PDF.</p>
+      <p style="color:var(--warn)"><b>Other sources say "no change," so confirm on
+      <a href="https://www.dhsekerala.gov.in" target="_blank" rel="noopener">dhsekerala.gov.in</a> before skipping them.</b>
+      Nothing is deleted permanently — one tap brings them back.</p>
+      <div class="row">
+        <button class="btn acc" id="exToggle">👁 Show the 4 chapters</button>
+        <span id="exCount" style="font-size:.82rem;color:var(--muted)"></span>
       </div>
     </div>
 
@@ -247,7 +271,7 @@
 /* ====================== CONTENT DATA ====================== */
 const CHAPTERS = [
 {
-  num:1, id:"solid-state", name:"The Solid State", wt:"Core",
+  num:1, id:"solid-state", name:"The Solid State", wt:"Core", ex:true,
   why:"Easy marks if you memorise the unit-cell formulas and defect types. Almost always one numerical (density / atoms per unit cell).",
   topics:[
     {h:"Crystalline vs amorphous solids", b:"<p><b>Crystalline solids</b> have a long-range, regular, repeating arrangement of particles, sharp melting points, definite geometry and are <i>anisotropic</i> (properties differ with direction). Examples: NaCl, diamond, quartz.</p><p><b>Amorphous solids</b> have only short-range order, melt over a range, have no definite shape and are <i>isotropic</i>. Examples: glass, rubber, plastic. They are called <i>pseudo-solids</i> or supercooled liquids.</p>"},
@@ -383,7 +407,7 @@ const CHAPTERS = [
   ]
 },
 {
-  num:5, id:"surface-chemistry", name:"Surface Chemistry", wt:"Core",
+  num:5, id:"surface-chemistry", name:"Surface Chemistry", wt:"Core", ex:true,
   why:"Short, descriptive and high-scoring. Adsorption types, colloids and Hardy–Schulze rule are easy 2–3 mark grabs.",
   topics:[
     {h:"Adsorption: physisorption vs chemisorption", b:"<table style='font-size:.85rem'><tr><td><b>Physisorption</b></td><td><b>Chemisorption</b></td></tr></table><ul><li><b>Physisorption:</b> weak van der Waals forces, low enthalpy (20–40 kJ/mol), reversible, multilayer, decreases with temperature, not specific.</li><li><b>Chemisorption:</b> chemical bond, high enthalpy (80–240 kJ/mol), irreversible, monolayer, increases then decreases with temperature, highly specific.</li></ul>"},
@@ -412,7 +436,7 @@ const CHAPTERS = [
   ]
 },
 {
-  num:6, id:"metallurgy", name:"General Principles & Processes of Isolation of Elements", wt:"Core",
+  num:6, id:"metallurgy", name:"General Principles & Processes of Isolation of Elements", wt:"Core", ex:true,
   why:"Mostly memory-based. Ellingham diagram reasoning and named processes (roasting, calcination, electrolytic reduction) are common.",
   topics:[
     {h:"Concentration of ore", b:"<p>Removing gangue: <b>hydraulic washing</b> (gravity), <b>magnetic separation</b>, <b>froth flotation</b> (sulphide ores, uses collectors/depressants), <b>leaching</b> (chemical, e.g. bauxite with NaOH, gold/silver with NaCN).</p>"},
@@ -442,7 +466,7 @@ const CHAPTERS = [
   ]
 },
 {
-  num:7, id:"p-block", name:"The p-Block Elements (Groups 15–18)", wt:"Medium",
+  num:7, id:"p-block", name:"The p-Block Elements (Groups 15–18)", wt:"Medium", ex:true,
   why:"Fact-dense but rewarding. Contact process, preparation of NH₃/HNO₃, structures of oxoacids and Xe compounds recur.",
   topics:[
     {h:"Group 15 — Nitrogen family", b:"<p>General trend: oxidation states −3 to +5. <b>Dinitrogen (N₂)</b> is inert due to a strong triple bond. <b>Ammonia (NH₃)</b> — Haber process, pyramidal, basic. <b>Nitric acid (HNO₃)</b> — Ostwald process. <b>Oxides of nitrogen</b> (N₂O, NO, NO₂...). Phosphorus allotropes (white = reactive, red = stable). <b>PCl₃, PCl₅</b> structures (trigonal pyramidal; trigonal bipyramidal). Oxoacids of P (H₃PO₃ dibasic, H₃PO₄ tribasic).</p>"},
@@ -771,10 +795,11 @@ const chaptersEl=document.getElementById('chapters');
 function renderSidebar(){
   let html='<h3>Jump to chapter</h3>';
   CHAPTERS.forEach(c=>{
-    html+=`<div class="navlink" data-id="${c.id}">
+    const badge=c.ex?`<span class="exbadge">Excl?</span>`:`<span class="wt ${c.wt}">${c.wt}</span>`;
+    html+=`<div class="navlink ${c.ex?'exch':''}" data-id="${c.id}">
       <span class="num">${c.num}</span>
       <span>${c.name}</span>
-      <span class="wt ${c.wt}">${c.wt==='Core'?'Core':c.wt}</span>
+      ${badge}
     </div>`;
   });
   html+='<h3>Sections</h3>';
@@ -803,8 +828,10 @@ function renderSidebar(){
 function renderChapters(){
   let html='';
   CHAPTERS.forEach(c=>{
-    html+=`<section class="chapter" id="ch-${c.id}">
-      <h2><span class="chnum">Ch ${c.num}</span> ${c.name} <span class="wt ${c.wt}">${c.wt}</span></h2>
+    const headBadge=c.ex?`<span class="exbadge">Reportedly excluded 2026</span>`:`<span class="wt ${c.wt}">${c.wt}</span>`;
+    html+=`<section class="chapter ${c.ex?'exch':''}" id="ch-${c.id}">
+      <h2><span class="chnum">Ch ${c.num}</span> ${c.name} ${headBadge}</h2>
+      ${c.ex?`<div class="why" style="color:var(--warn)">⚠️ This chapter is reported as deleted from the 2026 syllabus. Study it only after confirming on dhsekerala.gov.in.</div>`:''}
       <div class="why">💡 ${c.why}</div>`;
 
     html+=`<div class="sub"><h4>Important topics (explained)</h4>`;
@@ -908,7 +935,8 @@ const quizbar=document.getElementById('quizbar');
 let quizPool=[],quizIdx=0;
 function buildPool(){
   quizPool=[];
-  CHAPTERS.forEach(c=>c.questions.forEach(q=>quizPool.push({...q,ch:c.name})));
+  const hideEx=document.body.classList.contains('hideex');
+  CHAPTERS.forEach(c=>{ if(hideEx&&c.ex)return; c.questions.forEach(q=>quizPool.push({...q,ch:c.name})); });
   for(let i=quizPool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizPool[i],quizPool[j]]=[quizPool[j],quizPool[i]];}
 }
 function showQuiz(){
@@ -937,13 +965,26 @@ function expandAll(){
 }
 document.getElementById('printBtn').addEventListener('click',()=>{expandAll();setTimeout(()=>window.print(),60);});
 
+/* ---- Excluded-chapters toggle ---- */
+const exCount=document.getElementById('exCount');
+const exToggle=document.getElementById('exToggle');
+function applyEx(hide){
+  document.body.classList.toggle('hideex',hide);
+  localStorage.setItem('chem_hideex',hide?'1':'0');
+  exToggle.textContent=hide?'👁 Show the 4 chapters':'🙈 Hide the 4 chapters again';
+  exCount.textContent=hide?'Hidden from study, quiz and PDF.':'Now visible — verify on the official site before relying on them.';
+}
+exToggle.addEventListener('click',()=>applyEx(!document.body.classList.contains('hideex')));
+
 /* ---- init ---- */
 renderSidebar();
 renderChapters();
+applyEx(localStorage.getItem('chem_hideex')!=='0'); // default: hidden
 
-/* Print/PDF mode: ?print=1 expands everything and uses light theme (used for PDF export) */
+/* Print/PDF mode: ?print=1 expands everything, light theme, excluded chapters stay hidden */
 if(/[?&#]print/.test(location.search+location.hash)){
   applyTheme('light');
+  if(!/showall/.test(location.search+location.hash)) document.body.classList.add('hideex');
   expandAll();
 }
 </script>
