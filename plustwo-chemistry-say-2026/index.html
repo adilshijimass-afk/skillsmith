@@ -93,6 +93,17 @@
   .ans ul{margin:6px 0;padding-left:18px;font-size:.92rem}
   .reveal{font-size:.72rem;color:var(--accent);margin-left:auto;align-self:center;white-space:nowrap}
   .markmap{font-size:.83rem;color:var(--muted);margin-top:6px}
+  .prob{font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:20px;white-space:nowrap;
+    background:rgba(126,231,135,.16);color:var(--accent2);align-self:center}
+  .prob.lowp{background:rgba(240,162,59,.16);color:var(--warn)}
+  .starthere{font-size:.6rem;font-weight:800;padding:2px 7px;border-radius:20px;white-space:nowrap;
+    background:var(--accent);color:#04222f;align-self:center}
+  .drawcue{background:rgba(76,194,255,.08);border-left:3px solid var(--accent);border-radius:6px;
+    padding:7px 11px;margin:9px 0;font-size:.88rem}
+  .dgm{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 12px 8px;
+    margin:9px 0;text-align:center}
+  .dgm svg{color:var(--txt);max-width:100%;height:auto}
+  .dgm .cap{font-size:.8rem;color:var(--muted);margin-top:6px;text-align:left}
   footer{max-width:1500px;margin:0 auto;padding:10px 22px 60px;color:var(--muted);font-size:.82rem}
   .tipbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:16px 0}
   .tipbox h2{margin-top:0;font-size:1.05rem}
@@ -836,6 +847,97 @@ const MOCK = {
   ]
 };
 
+/* ---- Hand-drawable diagrams (schematic SVGs, theme-adaptive via currentColor) ---- */
+const SVG_CELL = `<svg viewBox="0 0 360 210" width="100%" style="max-width:380px" xmlns="http://www.w3.org/2000/svg">
+  <rect x="30" y="85" width="95" height="100" fill="none" stroke="currentColor" stroke-width="2"/>
+  <rect x="235" y="85" width="95" height="100" fill="none" stroke="currentColor" stroke-width="2"/>
+  <rect x="72" y="45" width="9" height="95" fill="currentColor"/>
+  <rect x="279" y="45" width="9" height="95" fill="currentColor"/>
+  <line x1="76" y1="45" x2="76" y2="28" stroke="currentColor" stroke-width="2"/>
+  <line x1="283" y1="45" x2="283" y2="28" stroke="currentColor" stroke-width="2"/>
+  <line x1="76" y1="28" x2="162" y2="28" stroke="currentColor" stroke-width="2"/>
+  <line x1="198" y1="28" x2="283" y2="28" stroke="currentColor" stroke-width="2"/>
+  <circle cx="180" cy="28" r="17" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text x="174" y="33" font-size="14" fill="currentColor">V</text>
+  <path d="M100 85 C100 60, 260 60, 260 85" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="150" y="62" font-size="10" fill="currentColor">salt bridge</text>
+  <text x="116" y="22" font-size="11" fill="#0a6ebd">e⁻ →</text>
+  <text x="44" y="200" font-size="11" fill="currentColor">Anode (−)</text>
+  <text x="250" y="200" font-size="11" fill="currentColor">Cathode (+)</text>
+</svg><div class="cap">Galvanic cell. Electrons flow through the wire from the anode (−) to the cathode (+); ions move through the salt bridge.</div>`;
+
+const SVG_CFT = `<svg viewBox="0 0 320 150" width="100%" style="max-width:340px" xmlns="http://www.w3.org/2000/svg">
+  <line x1="28" y1="78" x2="68" y2="78" stroke="currentColor" stroke-width="2.5"/>
+  <text x="22" y="98" font-size="10" fill="currentColor">free ion (5d)</text>
+  <line x1="148" y1="110" x2="176" y2="110" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="184" y1="110" x2="212" y2="110" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="220" y1="110" x2="248" y2="110" stroke="currentColor" stroke-width="2.5"/>
+  <text x="254" y="114" font-size="11" fill="currentColor">t2g</text>
+  <line x1="164" y1="44" x2="192" y2="44" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="206" y1="44" x2="234" y2="44" stroke="currentColor" stroke-width="2.5"/>
+  <text x="240" y="48" font-size="11" fill="currentColor">eg</text>
+  <line x1="200" y1="107" x2="200" y2="47" stroke="#0a6ebd" stroke-width="1.5"/>
+  <text x="205" y="80" font-size="12" fill="#0a6ebd">Δo</text>
+  <line x1="108" y1="78" x2="262" y2="78" stroke="currentColor" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.5"/>
+</svg><div class="cap">Octahedral d-orbital splitting. Strong-field ligand (CN⁻, NH₃) → big Δo → electrons pair in t2g → low-spin. Weak-field (F⁻) → small Δo → high-spin.</div>`;
+
+const SVG_MICELLE = `<svg viewBox="0 0 200 200" width="100%" style="max-width:200px" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="32" fill="#0a6ebd" fill-opacity="0.16" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="82" y="104" font-size="10" fill="currentColor">grease</text>
+  <line x1="132" y1="100" x2="168" y2="100" stroke="currentColor" stroke-width="1.5"/><circle cx="172" cy="100" r="5" fill="currentColor"/>
+  <line x1="123" y1="123" x2="148" y2="148" stroke="currentColor" stroke-width="1.5"/><circle cx="151" cy="151" r="5" fill="currentColor"/>
+  <line x1="100" y1="132" x2="100" y2="168" stroke="currentColor" stroke-width="1.5"/><circle cx="100" cy="172" r="5" fill="currentColor"/>
+  <line x1="77" y1="123" x2="52" y2="148" stroke="currentColor" stroke-width="1.5"/><circle cx="49" cy="151" r="5" fill="currentColor"/>
+  <line x1="68" y1="100" x2="32" y2="100" stroke="currentColor" stroke-width="1.5"/><circle cx="28" cy="100" r="5" fill="currentColor"/>
+  <line x1="77" y1="77" x2="52" y2="52" stroke="currentColor" stroke-width="1.5"/><circle cx="49" cy="49" r="5" fill="currentColor"/>
+  <line x1="100" y1="68" x2="100" y2="32" stroke="currentColor" stroke-width="1.5"/><circle cx="100" cy="28" r="5" fill="currentColor"/>
+  <line x1="123" y1="77" x2="148" y2="52" stroke="currentColor" stroke-width="1.5"/><circle cx="151" cy="49" r="5" fill="currentColor"/>
+</svg><div class="cap">Soap micelle. The oil-loving tails point into the grease; the water-loving heads (●) point outward, so the whole ball lifts off and washes away.</div>`;
+
+const SVG_BENZENE = `<svg viewBox="0 0 210 160" width="100%" style="max-width:230px" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="95,53 131,74 131,116 95,137 59,116 59,74" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="95" cy="95" r="24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
+  <line x1="95" y1="53" x2="95" y2="36" stroke="currentColor" stroke-width="2"/>
+  <text x="84" y="31" font-size="13" fill="currentColor">OH</text>
+  <line x1="131" y1="74" x2="156" y2="61" stroke="currentColor" stroke-width="2"/>
+  <text x="158" y="60" font-size="13" fill="currentColor">CHO</text>
+</svg><div class="cap">Salicylaldehyde — the –OH and –CHO sit on neighbouring (ortho) carbons. This is the Reimer–Tiemann product of phenol.</div>`;
+
+/* Estimated appearance probabilities + diagram cues, matched by a unique substring of each question. */
+const META = [
+  {match:"Define molarity", prob:70},
+  {match:"value of one Faraday", prob:60},
+  {match:"half-life of a first-order", prob:65},
+  {match:"stronger field ligand", prob:60},
+  {match:"silver-mirror test", prob:70},
+  {match:"State Henry's law", prob:70},
+  {match:"State Kohlrausch", prob:70},
+  {match:"order and molecularity of a reaction", prob:80},
+  {match:"chelate and an ambidentate", prob:75},
+  {match:"aldehydes more reactive than ketones", prob:75},
+  {match:"Why is phenol more acidic than ethanol", prob:80},
+  {match:"increasing order of basic strength", prob:80},
+  {match:"lanthanoid contraction and one consequence", prob:80},
+  {match:"two differences between DNA", prob:70},
+  {match:"addition and condensation polymerisation", prob:75},
+  {match:"Calculate the EMF", prob:85, dgm:SVG_CELL, draw:"a galvanic cell — two beakers, an electrode in each, a salt bridge on top and a voltmeter; mark anode (−) and cathode (+)."},
+  {match:"first-order reaction has k", prob:85},
+  {match:"non-electrolyte", prob:75},
+  {match:"Using CFT, explain why", prob:85, dgm:SVG_CFT, draw:"the d-orbital splitting: a lower t2g set (3 lines) and an upper eg set (2 lines) with the Δo gap between them."},
+  {match:"Write IUPAC names", prob:80},
+  {match:"Compare SN1 and SN2", prob:80},
+  {match:"distinguish (a) ethanal", prob:85},
+  {match:"Explain why phenol is more acidic", prob:75, dgm:SVG_BENZENE, draw:"the benzene ring with –OH; for the Reimer–Tiemann part put –OH and –CHO on next-door (ortho) carbons."},
+  {match:"synthetic importance of diazonium", prob:80},
+  {match:"spin-only magnetic moment of Fe", prob:75},
+  {match:"cleansing action of soap", prob:75, dgm:SVG_MICELLE, draw:"a micelle: a grease drop in the centre with soap molecules around it — tails pointing in, round ionic heads pointing out into water."},
+  {match:"Cannizzaro reaction", prob:70},
+  {match:"For the cell Mg", prob:80, dgm:SVG_CELL, draw:"the galvanic cell (two beakers, electrodes, salt bridge, voltmeter)."},
+  {match:"Using crystal field theory, explain the colour", prob:80, dgm:SVG_CFT, draw:"the octahedral splitting (t2g, eg, Δo) and show one electron jumping t2g→eg to explain colour."},
+  {match:"Complete and name the reaction", prob:80},
+  {match:"preparation of a primary amine", prob:80}
+];
+
 /* ====================== RENDER ====================== */
 const wtRank={High:0,Medium:1,Core:2};
 const sidebar=document.getElementById('sidebar');
@@ -927,16 +1029,28 @@ function renderMock(){
   let n=0;
   let html=`<section class="chapter" id="ch-predicted">
     <h2><span class="chnum" style="background:var(--accent2)">🔮</span> Predicted exam paper (high-probability) <span class="wt High">Do this</span></h2>
-    <div class="why">💡 A full mock in the real Kerala 60-mark format, built from recurring past-paper patterns. Not a leak — a high-probability prediction. Try to answer before tapping "Show answer". If you can do this paper, you pass.</div>`;
+    <div class="why">💡 A full mock in the real Kerala 60-mark format, built from recurring past-paper patterns.
+    The <b>% on each question is my honest estimate</b> of how likely that type appears — <b>not a leak</b>, just a guess from past papers.
+    Questions are sorted <b>most-likely first</b>, so start at the top of each section. A <span class="prob">👉 start here</span> tag marks the single best one to do first.
+    Some questions show a <b>✏️ diagram to draw</b> (drawing it in the exam earns marks). Answers are written the way you'd write them by hand. If you can do this paper, you pass.</div>`;
   MOCK.sections.forEach(sec=>{
     html+=`<div class="sub"><h4>${sec.title}</h4>`;
-    sec.items.forEach(it=>{
+    const rows=sec.items.map(it=>({it,meta:META.find(m=>it.q.includes(m.match))||{}}))
+      .sort((a,b)=>(b.meta.prob||50)-(a.meta.prob||50));
+    rows.forEach((row,idx)=>{
       n++;
+      const {it,meta}=row;
+      const prob=meta.prob||50;
+      const probBadge=`<span class="prob ${prob<70?'lowp':''}">≈${prob}%</span>`;
+      const startBadge=idx===0?`<span class="starthere">👉 start here</span>`:'';
+      const drawCue=meta.draw?`<div class="drawcue">✏️ <b>Draw this:</b> ${meta.draw}</div>`:'';
+      const dgm=meta.dgm?`<div class="dgm">${meta.dgm}</div>`:'';
       html+=`<div class="qcard" data-q>
         <div class="qhead"><span class="qm m${sec.marks}">Q${n} · ${sec.marks}m</span>
+        ${probBadge}${startBadge}
         <span class="qt">${it.q}</span>
         <span class="reveal">Show answer ▾</span></div>
-        <div class="ans"><div class="lbl">Model answer</div><p>${it.a}</p></div>
+        <div class="ans"><div class="lbl">Model answer (exam style)</div>${drawCue}${dgm}<p>${it.a}</p></div>
       </div>`;
     });
     html+=`</div>`;
